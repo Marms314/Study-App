@@ -6,7 +6,10 @@ public class Quiz extends AbstractEntity {
 
     private List<Question> questions;
 
+    public Quiz() {}
+
     public Quiz(List<Question> questions) {
+        super();
         this.questions = questions;
     }
 

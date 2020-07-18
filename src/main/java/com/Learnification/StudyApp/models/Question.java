@@ -1,7 +1,9 @@
 package com.Learnification.StudyApp.models;
 
+import javax.persistence.Entity;
 import java.util.HashMap;
 
+@Entity
 public class Question extends AbstractEntity {
 
     private String quiz;

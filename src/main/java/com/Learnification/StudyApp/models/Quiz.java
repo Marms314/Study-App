@@ -1,7 +1,9 @@
 package com.Learnification.StudyApp.models;
 
+import javax.persistence.Entity;
 import java.util.List;
 
+@Entity
 public class Quiz extends AbstractEntity {
 
     private List<Question> questions;

@@ -6,23 +6,23 @@ import java.util.HashMap;
 @Entity
 public class Question extends AbstractEntity {
 
-    private String quiz;
+    private Quiz quiz;
 
-    private HashMap<String, Boolean> answers;
+    private HashMap<String, Boolean> answers = new HashMap<>();
 
     public Question() {}
 
-    public Question(String quiz, HashMap<String, Boolean> answers) {
+    public Question(Quiz quiz, HashMap<String, Boolean> answers) {
         super();
         this.quiz = quiz;
         this.answers = answers;
     }
 
-    public String getQuiz() {
+    public Quiz getQuiz() {
         return quiz;
     }
 
-    public void setQuiz(String quiz) {
+    public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
     }
 

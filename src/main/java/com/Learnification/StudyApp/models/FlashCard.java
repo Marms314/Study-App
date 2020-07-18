@@ -7,11 +7,11 @@ public class FlashCard extends AbstractEntity {
 
     private String reverseSide;
 
-    private String cardDeck;
+    private CardDeck cardDeck;
 
     public FlashCard() {}
 
-    public FlashCard(String reverseSide, String cardDeck) {
+    public FlashCard(String reverseSide,CardDeck cardDeck) {
         this.reverseSide = reverseSide;
         this.cardDeck = cardDeck;
     }
@@ -24,11 +24,11 @@ public class FlashCard extends AbstractEntity {
         this.reverseSide = reverseSide;
     }
 
-    public String getCardDeck() {
+    public CardDeck getCardDeck() {
         return cardDeck;
     }
 
-    public void setCardDeck(String cardDeck) {
+    public void setCardDeck(CardDeck cardDeck) {
         this.cardDeck = cardDeck;
     }
 }

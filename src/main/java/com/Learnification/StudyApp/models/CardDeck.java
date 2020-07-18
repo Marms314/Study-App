@@ -5,21 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Quiz extends AbstractEntity {
+public class CardDeck extends AbstractEntity {
 
     private List<Question> questions = new ArrayList<>();
 
     private Category category;
 
-    private int scoreValue;
+    public CardDeck() {}
 
-    public Quiz() {}
-
-    public Quiz(List<Question> questions, Category category) {
+    public CardDeck(List<Question> questions, Category category) {
         super();
         this.questions = questions;
         this.category = category;
-        this.scoreValue = questions.size();
     }
 
     public void addQuestion(Question question) {
@@ -40,13 +37,5 @@ public class Quiz extends AbstractEntity {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public int getScoreValue() {
-        return scoreValue;
-    }
-
-    public void setScoreValue(int scoreValue) {
-        this.scoreValue = scoreValue;
     }
 }

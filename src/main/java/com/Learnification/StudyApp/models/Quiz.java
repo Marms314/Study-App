@@ -1,14 +1,18 @@
 package com.Learnification.StudyApp.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Quiz extends AbstractEntity {
 
+    @OneToMany(mappedBy = "quiz")
     private List<Question> questions = new ArrayList<>();
 
+    @ManyToOne
     private Category category;
 
     private int scoreValue;

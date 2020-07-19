@@ -1,16 +1,18 @@
 package com.Learnification.StudyApp.models;
 
-import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Category extends AbstractEntity {
 
+    @OneToMany(mappedBy = "category")
     private List<Quiz> quizzes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "category")
     private List<CardDeck> cardDecks = new ArrayList<>();
 
     public Category() {}

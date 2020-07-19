@@ -1,11 +1,13 @@
 package com.Learnification.StudyApp.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.HashMap;
 
 @Entity
 public class Question extends AbstractEntity {
 
+    @ManyToOne
     private Quiz quiz;
 
     private HashMap<String, Boolean> answers = new HashMap<>();

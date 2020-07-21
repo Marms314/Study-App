@@ -18,6 +18,14 @@ public class FlashCardController {
         return "flashcard/index";
     }
 
+    @RequestMapping("view")
+    public String renderFlashCardDeck(Model model) {
+
+        model.addAttribute("title", "This will be the card deck name");
+
+        return "flashcard/view";
+    }
+
     @GetMapping("create")
     public String renderCreateCardDeckForm(Model model) {
 

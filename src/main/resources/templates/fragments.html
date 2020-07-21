@@ -12,13 +12,19 @@
 
 <body>
 
-<div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top bg-dark">
+<div th:fragment="page-header" class="navbar navbar-fixed-top navbar-dark bg-dark">
     <div class="container" role="navigation">
         <div class="navbar-header">
             <a th:href="@{/}" class="navbar-brand">StudyTime</a>
         </div>
-        <div class="nav">
-            <ul class="nav">
+
+        <button class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
                 <li><a th:href="@{/flashcard/index}" class="nav-link">Flash Card Decks</a></li>
                 <li><a th:href="@{/quiz/index}" class="nav-link">Quizzes</a></li>
                 <li><a th:href="@{/category}" class="nav-link">All By Category</a></li>

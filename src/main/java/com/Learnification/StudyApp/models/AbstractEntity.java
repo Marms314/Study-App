@@ -19,8 +19,19 @@ public abstract class AbstractEntity {
     @Size(min = 1, max = 100, message = "Field must be between 1 and 100 characters.")
     private String name;
 
+    public AbstractEntity() {
+    }
+
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

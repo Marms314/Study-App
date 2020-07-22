@@ -8,8 +8,55 @@
 
 <div th:replace="fragments :: page-header"></div>
 
-<div class="container body-content">
-    <h2>Create Quiz</h2>
+<div class="container">
+    <h1 class="text-success" >Add New Quiz</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="quizName">Deck Name</label>
+            <input type="text" class="form-control" id="quizName" placeholder="Enter new quiz name">
+        </div>
+        <div class="form-group">
+            <label for="quizCategory">Quiz Category</label>
+            <select class="form-control" id="quizCategory">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <a th:href="@{'/category/create'}">Add Category</a>
+        </div>
+
+        <div class="p-5 border border-success form-group">
+            <p>Questions</p>
+
+            <div id="fieldToAdd" class="form-row my-3" style="display: none">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Question Text">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Correct Answer">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Wrong Answer">
+                </div>
+                <button type="button" class="btn btn-danger btn-sm" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" aria-label="Left Align">
+                    Remove Question
+                </button>
+            </div>
+
+            <div id="addFieldHere" class="form-row"></div>
+
+            <button type="button" class="btn btn-success btn-sm" id="moreFields" aria-label="Left Align">
+                Add Question
+            </button>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-success" >Submit</button>
+    </form>
 
 </div>
 

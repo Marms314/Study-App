@@ -10,7 +10,7 @@ moreCardsButton.addEventListener('click', moreFields);
 
 function moreFields() {
 	counter++;
-	var newFields = document.getElementById('addCardGroup').cloneNode(true);
+	var newFields = document.getElementById('fieldToAdd').cloneNode(true);
 	newFields.id = '';
 	newFields.style.display = '';
 	var newField = newFields.childNodes;
@@ -19,7 +19,7 @@ function moreFields() {
 		if (theName)
 			newField[i].name = theName + counter;
 	}
-	var insertHere = document.getElementById('addCardHere');
+	var insertHere = document.getElementById('addFieldHere');
 	insertHere.parentNode.insertBefore(newFields,insertHere);
 }
 

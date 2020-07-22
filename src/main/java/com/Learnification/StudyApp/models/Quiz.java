@@ -6,6 +6,7 @@ import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 public class Quiz extends AbstractEntity {
 
@@ -15,7 +16,7 @@ public class Quiz extends AbstractEntity {
     @ManyToOne
     private Category category;
 
-    private int scoreValue;
+    private int scoreValue = questions.size();
 
     public Quiz() {}
 
@@ -23,7 +24,6 @@ public class Quiz extends AbstractEntity {
         super();
         this.questions = questions;
         this.category = category;
-        this.scoreValue = questions.size();
     }
 
     public void addQuestion(Question question) {

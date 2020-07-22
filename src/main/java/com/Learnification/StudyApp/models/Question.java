@@ -2,7 +2,9 @@ package com.Learnification.StudyApp.models;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import java.util.HashMap;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 
 @Entity
 public class Question extends AbstractEntity {
@@ -10,14 +12,20 @@ public class Question extends AbstractEntity {
     @ManyToOne
     private Quiz quiz;
 
-    private HashMap<String, Boolean> answers = new HashMap<>();
+    @NotBlank(message = "Field cannot be blank.")
+    @Size(min = 1, max = 100, message = "Field must be between 1 and 100 characters.")
+    private String correctAnswer;
+
+    @NotBlank(message = "Field cannot be blank.")
+    @Size(min = 1, max = 100, message = "Field must be between 1 and 100 characters.")
+    private String wrongAnswer;
 
     public Question() {}
 
-    public Question(Quiz quiz, HashMap<String, Boolean> answers) {
-        super();
+    public Question(Quiz quiz, String correctAnswer, String wrongAnswer) {
         this.quiz = quiz;
-        this.answers = answers;
+        this.correctAnswer = correctAnswer;
+        this.wrongAnswer = wrongAnswer;
     }
 
     public Quiz getQuiz() {
@@ -28,11 +36,19 @@ public class Question extends AbstractEntity {
         this.quiz = quiz;
     }
 
-    public HashMap<String, Boolean> getAnswers() {
-        return answers;
+    public String getCorrectAnswer() {
+        return correctAnswer;
     }
 
-    public void setAnswers(HashMap<String, Boolean> answers) {
-        this.answers = answers;
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public String getWrongAnswer() {
+        return wrongAnswer;
+    }
+
+    public void setWrongAnswer(String wrongAnswer) {
+        this.wrongAnswer = wrongAnswer;
     }
 }

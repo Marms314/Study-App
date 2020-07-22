@@ -8,8 +8,57 @@
 
 <div th:replace="fragments :: page-header"></div>
 
+<div class="container">
+    <h1 class="text-primary" >Add New Flash Card Deck</h1>
 
-<div th:fragment="bootstrap-scripts"></div>
+    <form method="post">
+        <div class="form-group">
+            <label for="cardDeckName">Deck Name</label>
+            <input type="text" class="form-control" id="cardDeckName" placeholder="Enter new deck name">
+        </div>
+        <div class="form-group">
+            <label for="cardDeckCategory">Deck Category</label>
+            <select class="form-control" id="cardDeckCategory">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <a th:href="@{'/category/create'}">Add Category</a>
+        </div>
+
+        <div class="p-5 border border-primary form-group">
+            <p>Flash Cards</p>
+
+            <div id="fieldToAdd" class="form-row my-3" style="display: none">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Front of card">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Back of card">
+                </div>
+                <button type="button" class="btn btn-danger btn-sm" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" aria-label="Left Align">
+                    Remove Card
+                </button>
+            </div>
+
+            <div id="addFieldHere" class="form-row"></div>
+
+            <button type="button" class="btn btn-primary btn-sm" id="moreFields" aria-label="Left Align">
+                Add Card
+            </button>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary" >Submit</button>
+    </form>
+
+</div>
+
+
+<div th:replace="fragments :: scripts"></div>
 
 </body>
 </html>

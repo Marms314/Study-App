@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body class="bg-light">
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+    <h2>This will be the name of the card deck</h2>
+
+    <div id="cardCarouselControls" class="carousel slide bg-dark py-1" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <!--Single card-------------------->
+                <div class="scene mx-auto my-5">
+                    <div class="card flip-card h-100 w-100 bg-secondary text-white">
+                        <!--Front of card---------->
+                        <div class="card-face position-absolute h-100 w-100"style="backface-visibility: hidden; -webkit-backface-visibility: hidden;">
+                            <p class="text-center m-4">Front</p>
+                        </div>
+                        <!--Back of card----------->
+                        <div class="card-face position-absolute h-100 w-100" style="transform: rotateY(180deg); backface-visibility: hidden;
+                                                                             -webkit-backface-visibility: hidden;">
+                            <p class="text-center m-4">This is the back of the card.
+                                I want this to be a lot longer so I can make sure it works correctly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <!--Single card-------------------->
+                <div class="scene mx-auto my-5">
+                    <div class="card flip-card h-100 w-100 bg-secondary text-white">
+                        <!--Front of card---------->
+                        <div class="card-face position-absolute h-100 w-100"style="backface-visibility: hidden; -webkit-backface-visibility: hidden;">
+                            <p class="text-center m-4">Front</p>
+                        </div>
+                        <!--Back of card----------->
+                        <div class="card-face position-absolute h-100 w-100" style="transform: rotateY(180deg); backface-visibility: hidden;
+                                                                             -webkit-backface-visibility: hidden;">
+                            <p class="text-center m-4">This is the back of the card.
+                                I want this to be a lot longer so I can make sure it works correctly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <!--Single card-------------------->
+                <div class="scene mx-auto my-5">
+                    <div class="card flip-card h-100 w-100 bg-secondary text-white">
+                        <!--Front of card---------->
+                        <div class="card-face position-absolute h-100 w-100"style="backface-visibility: hidden; -webkit-backface-visibility: hidden;">
+                            <p class="text-center m-4">Front</p>
+                        </div>
+                        <!--Back of card----------->
+                        <div class="card-face position-absolute h-100 w-100" style="transform: rotateY(180deg); backface-visibility: hidden;
+                                                                             -webkit-backface-visibility: hidden;">
+                            <p class="text-center m-4">This is the back of the card.
+                                I want this to be a lot longer so I can make sure it works correctly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#cardCarouselControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#cardCarouselControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+</div>
+
+<div th:replace="fragments :: scripts"></div>
+
+</body>
+</html>

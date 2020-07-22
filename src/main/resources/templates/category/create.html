@@ -8,8 +8,16 @@
 
 <div th:replace="fragments :: page-header"></div>
 
-<div class="container body-content">
-    <h2>Create Category</h2>
+<div class="container">
+    <h1 class="text-dark" >Add New Flash Card Deck</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="categoryName">Category Name</label>
+            <input type="text" class="form-control" id="categoryName" placeholder="Enter new category name">
+        </div>
+        <button type="submit" class="btn btn-dark" >Submit</button>
+    </form>
 
 </div>
 

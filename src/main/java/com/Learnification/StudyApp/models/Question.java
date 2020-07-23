@@ -9,9 +9,6 @@ import javax.validation.constraints.Size;
 @Entity
 public class Question extends AbstractEntity {
 
-    @ManyToOne
-    private Quiz quiz;
-
     @NotBlank(message = "Field cannot be blank.")
     @Size(min = 1, max = 100, message = "Field must be between 1 and 100 characters.")
     private String correctAnswer;
@@ -20,9 +17,13 @@ public class Question extends AbstractEntity {
     @Size(min = 1, max = 100, message = "Field must be between 1 and 100 characters.")
     private String wrongAnswer;
 
+    @ManyToOne
+    private Quiz quiz;
+
     public Question() {}
 
-    public Question(Quiz quiz, String correctAnswer, String wrongAnswer) {
+    public Question(String name, String correctAnswer, String wrongAnswer, Quiz quiz) {
+        super(name);
         this.quiz = quiz;
         this.correctAnswer = correctAnswer;
         this.wrongAnswer = wrongAnswer;

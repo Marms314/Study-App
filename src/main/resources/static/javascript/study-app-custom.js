@@ -18,11 +18,12 @@ if (document.querySelector("#moreFields")) {
         var newFields = document.getElementById('fieldToAdd').cloneNode(true);
         newFields.id = '';
         newFields.style.display = '';
-        var newField = newFields.childNodes;
+        var newField = newFields.getElementsByClassName("form-control");
         for (var i=0;i<newField.length;i++) {
-            var theName = newField[i].name
-            if (theName)
+            var theName = newField[i].name;
+            if (theName) {
                 newField[i].name = theName + counter;
+            }
         }
         newFields.innerHTML += '<button type="button" class="btn btn-danger btn-sm" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" aria-label="Left Align">Remove</button>';
 

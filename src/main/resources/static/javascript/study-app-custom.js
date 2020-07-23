@@ -22,7 +22,7 @@ if (document.querySelector("#moreFields")) {
         for (var i=0;i<newField.length;i++) {
             var theName = newField[i].name;
             if (theName) {
-                newField[i].name = theName + counter;
+                newField[i].name = theName.replace(0, counter);
             }
         }
         newFields.innerHTML += '<button type="button" class="btn btn-danger btn-sm" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" aria-label="Left Align">Remove</button>';

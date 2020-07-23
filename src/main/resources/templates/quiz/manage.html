@@ -9,7 +9,26 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container body-content">
-    <h2>Manage Quizzes</h2>
+    <h2 class="text-success">Manage Quizzes</h2>
+    <div class="alert alert-success" role="alert" th:if="${quizWasDeleted}">Quiz was deleted.</div>
+    <div class="alert alert-danger" role="alert" th:if="${noIdsSelected}">Please select the quizzes to delete.</div>
+
+    <form method="post">
+        <table class="table">
+            <tr>
+                <th scope="col">Quiz Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Delete?</th>
+            </tr>
+            <tr th:each="quiz : ${quizzes}">
+                <td th:text="${quiz.name}"></td>
+                <td th:text="${quiz.category}"></td>
+                <td><input type="checkbox" name="quizIds" th:value="${quiz.id}"></td>
+            </tr>
+        </table>
+
+        <input type="submit" value="Delete" class="btn btn-danger">
+    </form>
 
 </div>
 

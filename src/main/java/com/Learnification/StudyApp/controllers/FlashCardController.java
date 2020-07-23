@@ -36,12 +36,18 @@ public class FlashCardController {
         return "flashcard/index";
     }
 
-    @RequestMapping("view")
-    public String renderFlashCardDeck(Model model) {
+    @RequestMapping("view/{cardDeckId}")
+    public String renderFlashCardDeck(Model model, @PathVariable int cardDeckId) {
 
-        model.addAttribute("title", "This will be the card deck name");
+        Optional optCardDeck = cardDeckRepository.findById(cardDeckId);
+        if (optCardDeck.isPresent()) {
+            CardDeck cardDeck = (CardDeck) optCardDeck.get();
+            model.addAttribute("title", cardDeck.getName());
+            model.addAttribute("flashCards", cardDeck.getFlashcards());
+            return "flashcard/view";
+        }
 
-        return "flashcard/view";
+        return "flashcard/index";
     }
 
     @GetMapping("create")

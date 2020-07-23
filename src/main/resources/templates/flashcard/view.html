@@ -9,63 +9,28 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container body-content">
-    <h2>This will be the name of the card deck</h2>
+    <h2 class="text-primary my-3" th:text="${title}"></h2>
 
-    <div id="cardCarouselControls" class="carousel slide bg-dark py-1" data-ride="carousel">
+    <div id="cardCarouselControls" data-interval="false" class="carousel slide bg-dark py-1" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <!--Single card-------------------->
-                <div class="scene mx-auto my-5">
-                    <div class="card flip-card h-100 w-100 bg-secondary text-white">
-                        <!--Front of card---------->
-                        <div class="card-face position-absolute h-100 w-100"style="backface-visibility: hidden; -webkit-backface-visibility: hidden;">
-                            <p class="text-center m-4">Front</p>
-                        </div>
-                        <!--Back of card----------->
-                        <div class="card-face position-absolute h-100 w-100" style="transform: rotateY(180deg); backface-visibility: hidden;
-                                                                             -webkit-backface-visibility: hidden;">
-                            <p class="text-center m-4">This is the back of the card.
-                                I want this to be a lot longer so I can make sure it works correctly.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="carousel-item">
-                <!--Single card-------------------->
-                <div class="scene mx-auto my-5">
-                    <div class="card flip-card h-100 w-100 bg-secondary text-white">
-                        <!--Front of card---------->
-                        <div class="card-face position-absolute h-100 w-100"style="backface-visibility: hidden; -webkit-backface-visibility: hidden;">
-                            <p class="text-center m-4">Front</p>
-                        </div>
-                        <!--Back of card----------->
-                        <div class="card-face position-absolute h-100 w-100" style="transform: rotateY(180deg); backface-visibility: hidden;
-                                                                             -webkit-backface-visibility: hidden;">
-                            <p class="text-center m-4">This is the back of the card.
-                                I want this to be a lot longer so I can make sure it works correctly.</p>
+            <th:block th:each = "flashCard, iStat : ${flashCards}">
+                <div class="carousel-item" th:classappend="${iStat.first}? 'active'">
+                    <!--Single card-------------------->
+                    <div class="scene mx-auto my-5">
+                        <div class="card flip-card h-100 w-100 bg-secondary text-white">
+                            <!--Front of card---------->
+                            <div class="card-face position-absolute h-100 w-100"style="backface-visibility: hidden; -webkit-backface-visibility: hidden;">
+                                <p class="text-center m-4" th:text="${flashCard.Name}"></p>
+                            </div>
+                            <!--Back of card----------->
+                            <div class="card-face position-absolute h-100 w-100" style="transform: rotateY(180deg); backface-visibility: hidden;
+                                                                                 -webkit-backface-visibility: hidden;">
+                                <p class="text-center m-4" th:text="${flashCard.reverseSide}"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="carousel-item">
-                <!--Single card-------------------->
-                <div class="scene mx-auto my-5">
-                    <div class="card flip-card h-100 w-100 bg-secondary text-white">
-                        <!--Front of card---------->
-                        <div class="card-face position-absolute h-100 w-100"style="backface-visibility: hidden; -webkit-backface-visibility: hidden;">
-                            <p class="text-center m-4">Front</p>
-                        </div>
-                        <!--Back of card----------->
-                        <div class="card-face position-absolute h-100 w-100" style="transform: rotateY(180deg); backface-visibility: hidden;
-                                                                             -webkit-backface-visibility: hidden;">
-                            <p class="text-center m-4">This is the back of the card.
-                                I want this to be a lot longer so I can make sure it works correctly.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </th:block>
         </div>
         <a class="carousel-control-prev" href="#cardCarouselControls" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -13,13 +13,13 @@ public class FlashCard extends AbstractEntity {
     @Size(min = 1, max = 100, message = "Field must be between 1 and 100 characters.")
     private String reverseSide;
 
-    @NotBlank(message = "Field cannot be blank.")
     @ManyToOne
     private CardDeck cardDeck;
 
     public FlashCard() {}
 
-    public FlashCard(String reverseSide,CardDeck cardDeck) {
+    public FlashCard(String name, String reverseSide, CardDeck cardDeck) {
+        super(name);
         this.reverseSide = reverseSide;
         this.cardDeck = cardDeck;
     }

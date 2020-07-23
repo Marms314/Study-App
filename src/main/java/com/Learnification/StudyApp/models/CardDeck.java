@@ -11,11 +11,9 @@ import java.util.List;
 @Entity
 public class CardDeck extends AbstractEntity {
 
-    @NotBlank(message = "Field cannot be blank.")
     @OneToMany(mappedBy = "cardDeck")
     private List<FlashCard> flashcards = new ArrayList<>();
 
-    @NotBlank(message = "Field cannot be blank.")
     @ManyToOne
     private Category category;
 

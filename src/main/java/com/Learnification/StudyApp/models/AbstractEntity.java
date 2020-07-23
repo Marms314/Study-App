@@ -22,6 +22,10 @@ public abstract class AbstractEntity {
     public AbstractEntity() {
     }
 
+    public AbstractEntity(String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

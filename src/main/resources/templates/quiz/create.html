@@ -9,41 +9,37 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container">
-    <h1 class="text-success" >Add New Quiz</h1>
+    <h1 class="text-success">Add New Quiz</h1>
 
     <form method="post">
         <div class="form-group">
-            <label for="quizName">Deck Name</label>
-            <input type="text" class="form-control" id="quizName" placeholder="Enter new quiz name">
+            <label for="quizName">Quiz Name</label>
+            <input th:field="${quiz.name}" class="form-control" id="quizName" placeholder="Enter new quiz name" required>
+            <span th:errors="${quiz.name}" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label for="quizCategory">Quiz Category</label>
-            <select class="form-control" id="quizCategory">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+            <select class="form-control" id="quizCategory" th:field="*{quiz.category}">
+                <option th:each="category : ${categories}" th:text="${category}" th:value="${category.id}"></option>
             </select>
             <a th:href="@{'/category/create'}">Add Category</a>
         </div>
 
         <div class="p-5 border border-success form-group">
             <p>Questions</p>
+            <p th:if="${questionError}" class="text-danger">All fields must be filled.</p>
+            <p th:if="${questionError}" class="text-danger">Fields must be between 1 - 100 characters.</p>
 
-            <div id="fieldToAdd" class="form-row my-3" style="display: none">
+            <div id="fieldToAdd" class="form-row my-3">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Question Text">
+                    <input type="text" name="questionName0" class="form-control" placeholder="Question Text" required>
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Correct Answer">
+                    <input type="text" name="questionCorrectAnswer0" class="form-control" placeholder="Correct Answer" required>
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Wrong Answer">
+                    <input type="text" name="questionWrongAnswer0" class="form-control" placeholder="Wrong Answer" required>
                 </div>
-                <button type="button" class="btn btn-danger btn-sm" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" aria-label="Left Align">
-                    Remove Question
-                </button>
             </div>
 
             <div id="addFieldHere" class="form-row"></div>

@@ -3,9 +3,10 @@ package com.Learnification.StudyApp.models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-//import javax.validation.constraints.NotBlank;
-//import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
+
 
 @MappedSuperclass
 public abstract class AbstractEntity {
@@ -14,12 +15,27 @@ public abstract class AbstractEntity {
     @GeneratedValue
     private int id;
 
-//    @NotBlank(message = "Field cannot be blank.")
-//    @Size
+    @NotBlank(message = "Field cannot be blank.")
+    @Size(min = 1, max = 100, message = "Field must be between 1 and 100 characters.")
     private String name;
+
+    public AbstractEntity() {
+    }
+
+    public AbstractEntity(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

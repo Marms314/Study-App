@@ -5,9 +5,14 @@ import com.Learnification.StudyApp.models.data.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("category")
@@ -34,10 +39,15 @@ public class CategoryController {
     }
 
     @PostMapping("create")
-    public String processCreateCategoryForm(Model model) {
+    public String processCreateCategoryForm(@ModelAttribute @Valid Category category, BindingResult bindingResult, Model model) {
 
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("title", "New Category");
+            return "category/create";
+        }
 
-        return "redirect:../";
+        categoryRepository.save(category);
+        return "redirect:index";
     }
 
     @GetMapping("manage")

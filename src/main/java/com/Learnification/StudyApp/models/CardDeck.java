@@ -3,8 +3,10 @@ package com.Learnification.StudyApp.models;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 public class CardDeck extends AbstractEntity {

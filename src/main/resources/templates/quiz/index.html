@@ -9,7 +9,46 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container body-content">
-    <h2>Quizzes Index</h2>
+    <h2 class="text-success my-3">Quizzes</h2>
+
+    <!--Top row of 2 cards-->
+    <div class="row">
+        <div class="mx-auto mb-3">
+            <div class="card border-success text-white bg-white mb-3 h-100" style="max-width: 18rem;">
+                <div class="card-header bg-success">Quiz</div>
+                <div class="card-body text-success">
+                    <h5 class="card-title">Create Quiz</h5>
+                    <p class="card-text mb-5">Need to add a new quiz? Click here!</p>
+                    <a href="create" class="btn btn-success" style="position: absolute; bottom: 1rem;">Let's go!</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-auto mb-3">
+            <div class="card border-success text-white bg-white mb-3 h-100" style="max-width: 18rem;">
+                <div class="card-header bg-success">Quiz</div>
+                <div class="card-body text-success">
+                    <h5 class="card-title">Manage Quizzes</h5>
+                    <p class="card-text mb-5">Is there a quiz you no longer need?</p>
+                    <a href="manage" class="btn btn-success" style="position: absolute; bottom: 1rem;">Let's go!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--All deck cards-->
+    <div class="row">
+        <div class="col-xs-12 col-lg-3 mb-3" th:each="quiz : ${quizzes}">
+            <div class="card text-success bg-secondary mb-3 h-100" style="max-width: 15rem; height: 95%;">
+                <div class="card-header bg-dark">Quiz</div>
+                <div class="card-body text-white">
+                    <h5 class="card-title" th:text="${quiz.name}"></h5>
+                    <p class="card-text mb-5" th:text="${quiz.category}"></p>
+                    <a th:href="@{'view/' + ${quiz.id}}" class="btn btn-success" style="position: absolute; bottom: 1rem;">Let's go!</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 

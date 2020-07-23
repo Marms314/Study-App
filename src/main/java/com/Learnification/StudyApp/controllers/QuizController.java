@@ -33,6 +33,7 @@ public class QuizController {
     public String index(Model model) {
 
         model.addAttribute("title", "Are you ready?");
+        model.addAttribute("quizzes", quizRepository.findAll());
 
         return "quiz/index";
     }

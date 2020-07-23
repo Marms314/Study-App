@@ -2,8 +2,6 @@ package com.Learnification.StudyApp.controllers;
 
 import com.Learnification.StudyApp.models.CardDeck;
 import com.Learnification.StudyApp.models.FlashCard;
-import com.Learnification.StudyApp.models.Question;
-import com.Learnification.StudyApp.models.Quiz;
 import com.Learnification.StudyApp.models.data.CardDeckRepository;
 import com.Learnification.StudyApp.models.data.CategoryRepository;
 import com.Learnification.StudyApp.models.data.FlashCardRepository;

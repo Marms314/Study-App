@@ -89,6 +89,8 @@ public class QuizController {
     @GetMapping("manage")
     public String renderManageQuizForm(Model model) {
 
+        boolean quizzesExist = quizRepository.count() != 0;
+        model.addAttribute("quizzesExist", quizzesExist);
         model.addAttribute("title", "Manage Quizzes");
         model.addAttribute("quizzes", quizRepository.findAll());
 
@@ -112,11 +114,15 @@ public class QuizController {
                 quizRepository.delete(currentQuiz);
             }
 
+            boolean quizzesExist = quizRepository.count() != 0;
+            model.addAttribute("quizzesExist", quizzesExist);
             model.addAttribute("quizWasDeleted", true);
             model.addAttribute("quizzes", quizRepository.findAll());
             return "quiz/manage";
         }
 
+        boolean quizzesExist = quizRepository.count() != 0;
+        model.addAttribute("quizzesExist", quizzesExist);
         model.addAttribute("quizzes", quizRepository.findAll());
         model.addAttribute("noIdsSelected", true);
         return "quiz/manage";

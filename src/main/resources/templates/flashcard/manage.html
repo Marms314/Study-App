@@ -9,7 +9,30 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container body-content">
-    <h2>Manage Card Decks</h2>
+    <h2 class="text-primary">Manage Card Decks</h2>
+    <div class="alert alert-success" role="alert" th:if="${deckWasDeleted}">Card deck was deleted.</div>
+    <div class="alert alert-danger" role="alert" th:if="${noIdsSelected}">Please select the card decks to delete.</div>
+
+    <p th:unless="${cardDecksExist}">Nothing to manage!</p>
+
+    <div th:if="${cardDecksExist}">
+        <form method="post">
+            <table class="table">
+                <tr>
+                    <th scope="col">Card Deck Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Delete?</th>
+                </tr>
+                <tr th:each="cardDeck : ${cardDecks}">
+                    <td th:text="${cardDeck.name}"></td>
+                    <td th:text="${cardDeck.category}"></td>
+                    <td><input type="checkbox" name="cardDeckIds" th:value="${cardDeck.id}"></td>
+                </tr>
+            </table>
+
+            <input type="submit" value="Delete" class="btn btn-danger">
+        </form>
+    </div>
 
 </div>
 

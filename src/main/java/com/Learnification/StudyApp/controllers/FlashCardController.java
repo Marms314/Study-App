@@ -32,6 +32,7 @@ public class FlashCardController {
     public String index(Model model) {
 
         model.addAttribute("title", "Memorization");
+        model.addAttribute("cardDecks", cardDeckRepository.findAll());
 
         return "flashcard/index";
     }

@@ -28,7 +28,7 @@ public class CategoryController {
     public String index(Model model) {
 
         model.addAttribute("title", "Everything, Categorized");
-
+        model.addAttribute("categories", categoryRepository.findAll());
         return "category/index";
     }
 

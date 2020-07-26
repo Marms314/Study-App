@@ -32,6 +32,7 @@ public class FlashCardController {
     public String index(Model model) {
 
         model.addAttribute("title", "Memorization");
+        model.addAttribute("cardDecks", cardDeckRepository.findAll());
 
         return "flashcard/index";
     }
@@ -103,16 +104,45 @@ public class FlashCardController {
     @GetMapping("manage")
     public String renderManageCardDeckForm(Model model) {
 
-        model.addAttribute("title", "New Quiz");
+        boolean cardDecksExist = cardDeckRepository.count() != 0;
+        model.addAttribute("cardDecksExist", cardDecksExist);
+        model.addAttribute("title", "Manage Flash Cards");
+        model.addAttribute("cardDecks", cardDeckRepository.findAll());
 
         return "flashcard/manage";
     }
 
     @PostMapping("manage")
-    public String processManageCardDeckForm(Model model) {
+    public String processManageCardDeckForm(@RequestParam(required = false) int[] cardDeckIds, Model model) {
 
+        if (cardDeckIds != null) {
+            ArrayList<FlashCard> flashCards = (ArrayList<FlashCard>) flashCardRepository.findAll();
 
-        return "redirect:../";
+            for (int id : cardDeckIds) {
+                CardDeck currentCardDeck = cardDeckRepository.findById(id).get();
+                for (FlashCard flashCard : flashCards) {
+                    CardDeck flashCardCardDeck = flashCard.getCardDeck();
+                    if (flashCardCardDeck.equals(currentCardDeck)) {
+                        flashCardRepository.delete(flashCard);
+                    }
+                }
+                cardDeckRepository.delete(currentCardDeck);
+            }
+
+            boolean cardDecksExist = cardDeckRepository.count() != 0;
+            model.addAttribute("cardDecksExist", cardDecksExist);
+            model.addAttribute("title", "Manage Flash Cards");
+            model.addAttribute("deckWasDeleted", true);
+            model.addAttribute("cardDecks", cardDeckRepository.findAll());
+            return "flashcard/manage";
+        }
+
+        boolean cardDecksExist = cardDeckRepository.count() != 0;
+        model.addAttribute("cardDecksExist", cardDecksExist);
+        model.addAttribute("title", "Manage Flash Cards");
+        model.addAttribute("cardDecks", cardDeckRepository.findAll());
+        model.addAttribute("noIdsSelected", true);
+        return "flashcard/manage";
     }
 
 }

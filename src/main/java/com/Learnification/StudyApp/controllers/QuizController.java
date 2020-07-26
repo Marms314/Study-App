@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -33,6 +30,7 @@ public class QuizController {
     public String index(Model model) {
 
         model.addAttribute("title", "Are you ready?");
+        model.addAttribute("quizzes", quizRepository.findAll());
 
         return "quiz/index";
     }
@@ -91,16 +89,45 @@ public class QuizController {
     @GetMapping("manage")
     public String renderManageQuizForm(Model model) {
 
-        model.addAttribute("title", "New Quiz");
+        boolean quizzesExist = quizRepository.count() != 0;
+        model.addAttribute("quizzesExist", quizzesExist);
+        model.addAttribute("title", "Manage Quizzes");
+        model.addAttribute("quizzes", quizRepository.findAll());
 
         return "quiz/manage";
     }
 
     @PostMapping("manage")
-    public String processManageQuizForm(Model model) {
+    public String processManageQuizForm(@RequestParam(required = false) int[] quizIds, Model model) {
 
+        if (quizIds != null) {
+            ArrayList<Question> questions = (ArrayList<Question>) questionRepository.findAll();
 
-        return "redirect:../";
+            for (int id : quizIds) {
+                Quiz currentQuiz = quizRepository.findById(id).get();
+                for (Question question : questions) {
+                    Quiz questionQuiz = question.getQuiz();
+                    if (questionQuiz.equals(currentQuiz)) {
+                        questionRepository.delete(question);
+                    }
+                }
+                quizRepository.delete(currentQuiz);
+            }
+
+            boolean quizzesExist = quizRepository.count() != 0;
+            model.addAttribute("quizzesExist", quizzesExist);
+            model.addAttribute("quizWasDeleted", true);
+            model.addAttribute("title", "Manage Quizzes");
+            model.addAttribute("quizzes", quizRepository.findAll());
+            return "quiz/manage";
+        }
+
+        boolean quizzesExist = quizRepository.count() != 0;
+        model.addAttribute("quizzesExist", quizzesExist);
+        model.addAttribute("quizzes", quizRepository.findAll());
+        model.addAttribute("title", "Manage Quizzes");
+        model.addAttribute("noIdsSelected", true);
+        return "quiz/manage";
     }
 
 }

@@ -1,18 +1,21 @@
 package com.Learnification.StudyApp.controllers;
 
 import com.Learnification.StudyApp.models.Category;
+import com.Learnification.StudyApp.models.Question;
+import com.Learnification.StudyApp.models.Quiz;
 import com.Learnification.StudyApp.models.data.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("category")
@@ -25,7 +28,7 @@ public class CategoryController {
     public String index(Model model) {
 
         model.addAttribute("title", "Everything, Categorized");
-
+        model.addAttribute("categories", categoryRepository.findAll());
         return "category/index";
     }
 
@@ -53,16 +56,38 @@ public class CategoryController {
     @GetMapping("manage")
     public String renderManageCategoriesForm(Model model) {
 
+        boolean categoriesExist = categoryRepository.count() != 0;
+        model.addAttribute("categoriesExist", categoriesExist);
         model.addAttribute("title", "Manage Categories");
-
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("categoryDeleted", true);
         return "category/manage";
     }
 
     @PostMapping("manage")
-    public String processManageCategoriesForm(Model model) {
+    public String processManageCategoriesForm(@RequestParam(required = false) int[] categoryIds, @RequestParam String deleteAcknowledgement, Model model) {
 
+        if (categoryIds != null) {
 
-        return "redirect:../";
+            for (int id : categoryIds) {
+                Optional<Category> currentCategory = categoryRepository.findById(id);
+                categoryRepository.delete(currentCategory.get());
+            }
+
+            boolean categoriesExist = categoryRepository.count() != 0;
+            model.addAttribute("categoriesExist", categoriesExist);
+            model.addAttribute("title", "Manage Categories");
+            model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("categoryWasDeleted", true);
+            return "category/manage";
+        }
+
+        boolean categoriesExist = categoryRepository.count() != 0;
+        model.addAttribute("categoriesExist", categoriesExist);
+        model.addAttribute("title", "Manage Categories");
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("noIdsSelected", true);
+        return "category/manage";
     }
 
 }

@@ -1,7 +1,7 @@
 package com.Learnification.StudyApp.models;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +13,15 @@ public class Quiz extends AbstractEntity {
     @OneToMany(mappedBy = "quiz")
     private List<Question> questions = new ArrayList<>();
 
-    @ManyToOne
-    private Category category;
-
-    private int scoreValue = questions.size();
+    @ManyToMany
+    private List<Category> categories = new ArrayList<>();
 
     public Quiz() {}
 
-    public Quiz(List<Question> questions, Category category) {
+    public Quiz(List<Question> questions, List<Category> categories) {
         super();
         this.questions = questions;
-        this.category = category;
+        this.categories = categories;
     }
 
     public void addQuestion(Question question) {
@@ -38,19 +36,11 @@ public class Quiz extends AbstractEntity {
         this.questions = questions;
     }
 
-    public Category getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public int getScoreValue() {
-        return scoreValue;
-    }
-
-    public void setScoreValue(int scoreValue) {
-        this.scoreValue = scoreValue;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 }

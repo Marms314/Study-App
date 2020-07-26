@@ -1,9 +1,8 @@
 package com.Learnification.StudyApp.models;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,15 +13,15 @@ public class CardDeck extends AbstractEntity {
     @OneToMany(mappedBy = "cardDeck")
     private List<FlashCard> flashcards = new ArrayList<>();
 
-    @ManyToOne
-    private Category category;
+    @ManyToMany
+    private List<Category> categories = new ArrayList<>();
 
     public CardDeck() {}
 
-    public CardDeck(List<FlashCard> flashCards, Category category) {
+    public CardDeck(List<FlashCard> flashCards, List<Category> categories) {
         super();
         this.flashcards = flashCards;
-        this.category = category;
+        this.categories = categories;
     }
 
     public void addFlashCard(FlashCard flashCard) {
@@ -37,11 +36,11 @@ public class CardDeck extends AbstractEntity {
         this.flashcards = flashcards;
     }
 
-    public Category getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 }

@@ -2,7 +2,7 @@ package com.Learnification.StudyApp.models;
 
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +10,10 @@ import java.util.List;
 @Entity
 public class Category extends AbstractEntity {
 
-    @OneToMany(mappedBy = "category")
+    @ManyToMany(mappedBy = "categories")
     private List<Quiz> quizzes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "category")
+    @ManyToMany(mappedBy = "categories")
     private List<CardDeck> cardDecks = new ArrayList<>();
 
     public Category() {}

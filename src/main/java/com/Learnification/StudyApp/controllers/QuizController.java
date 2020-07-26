@@ -117,6 +117,7 @@ public class QuizController {
             boolean quizzesExist = quizRepository.count() != 0;
             model.addAttribute("quizzesExist", quizzesExist);
             model.addAttribute("quizWasDeleted", true);
+            model.addAttribute("title", "Manage Quizzes");
             model.addAttribute("quizzes", quizRepository.findAll());
             return "quiz/manage";
         }
@@ -124,6 +125,7 @@ public class QuizController {
         boolean quizzesExist = quizRepository.count() != 0;
         model.addAttribute("quizzesExist", quizzesExist);
         model.addAttribute("quizzes", quizRepository.findAll());
+        model.addAttribute("title", "Manage Quizzes");
         model.addAttribute("noIdsSelected", true);
         return "quiz/manage";
     }

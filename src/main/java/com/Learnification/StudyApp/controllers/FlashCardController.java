@@ -131,6 +131,7 @@ public class FlashCardController {
 
             boolean cardDecksExist = cardDeckRepository.count() != 0;
             model.addAttribute("cardDecksExist", cardDecksExist);
+            model.addAttribute("title", "Manage Flash Cards");
             model.addAttribute("deckWasDeleted", true);
             model.addAttribute("cardDecks", cardDeckRepository.findAll());
             return "flashcard/manage";
@@ -138,6 +139,7 @@ public class FlashCardController {
 
         boolean cardDecksExist = cardDeckRepository.count() != 0;
         model.addAttribute("cardDecksExist", cardDecksExist);
+        model.addAttribute("title", "Manage Flash Cards");
         model.addAttribute("cardDecks", cardDeckRepository.findAll());
         model.addAttribute("noIdsSelected", true);
         return "flashcard/manage";

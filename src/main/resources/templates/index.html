@@ -9,6 +9,7 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container body-content">
+    <div class="alert alert-success my-3" role="alert" th:if="${dummyDataAdded}">Test data added successfully.</div>
     <div class="mx-auto text-center" style="max-width: 400px;">
         <h2>Hello, welcome to StudyTime!</h2>
         <p>What would you like to do today?</p>

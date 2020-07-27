@@ -23,8 +23,6 @@ public class QuizController {
     @Autowired
     private QuestionRepository questionRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
 
     @RequestMapping(value={"", "/index"})
     public String index(Model model) {
@@ -39,7 +37,6 @@ public class QuizController {
     public String renderCreateQuizForm(Model model) {
 
         model.addAttribute("title", "New Quiz");
-        model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute(new Quiz());
 
         return "quiz/create";
@@ -51,7 +48,6 @@ public class QuizController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("title", "New Quiz");
-            model.addAttribute("categories", categoryRepository.findAll());
             return "quiz/create";
         }
 
@@ -66,7 +62,6 @@ public class QuizController {
 
         if (questionParams.containsValue("") || questionParams.containsValue(null)) {
             model.addAttribute("title", "New Quiz");
-            model.addAttribute("categories", categoryRepository.findAll());
             model.addAttribute("questionError", true);
             return "quiz/create";
         }

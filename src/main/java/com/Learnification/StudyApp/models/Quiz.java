@@ -1,8 +1,9 @@
 package com.Learnification.StudyApp.models;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +14,16 @@ public class Quiz extends AbstractEntity {
     @OneToMany(mappedBy = "quiz")
     private List<Question> questions = new ArrayList<>();
 
-    @ManyToMany
-    private List<Category> categories = new ArrayList<>();
+    @NotBlank(message = "Field cannot be blank.")
+    @Size(min = 1, max = 100, message = "Field must be between 1 and 100 characters.")
+    private String description;
 
     public Quiz() {}
 
-    public Quiz(List<Question> questions, List<Category> categories) {
+    public Quiz(List<Question> questions, String description) {
         super();
         this.questions = questions;
-        this.categories = categories;
+        this.description = description;
     }
 
     public void addQuestion(Question question) {
@@ -36,11 +38,12 @@ public class Quiz extends AbstractEntity {
         this.questions = questions;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
 }

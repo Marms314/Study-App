@@ -25,7 +25,7 @@ if (document.querySelector("#moreFields")) {
                 newField[i].name = theName.replace(0, counter);
             }
         }
-        newFields.innerHTML += '<button type="button" class="btn btn-danger btn-sm" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" aria-label="Left Align">Remove</button>';
+        newFields.innerHTML += '<button type="button" class="btn btn-danger btn-sm col-md-3 my-1" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" aria-label="Left Align">Remove</button>';
 
         var insertHere = document.getElementById("addFieldHere");
         insertHere.parentNode.insertBefore(newFields,insertHere);

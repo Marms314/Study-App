@@ -1,5 +1,6 @@
 package com.Learnification.StudyApp.controllers;
 
+import com.Learnification.StudyApp.models.CardDeck;
 import com.Learnification.StudyApp.models.Question;
 import com.Learnification.StudyApp.models.Quiz;
 import com.Learnification.StudyApp.models.data.*;
@@ -32,6 +33,31 @@ public class QuizController {
 
         return "quiz/index";
     }
+
+
+    @RequestMapping("view/{quizId}")
+    public String renderQuiz(Model model, @PathVariable int quizId) {
+
+        Optional optQuiz = quizRepository.findById(quizId);
+        if (optQuiz.isPresent()) {
+            Quiz quiz = (Quiz) optQuiz.get();
+            model.addAttribute("title", quiz.getName());
+            model.addAttribute("flashCards", quiz.getQuestions());
+            return "quiz/view";
+        }
+
+        return "quiz/index";
+    }
+
+
+    @GetMapping("random")
+    public String chooseRandomQuiz(Model model) {
+        List<Quiz> allQuizzes = (ArrayList<Quiz>) quizRepository.findAll();
+        int randomIndex = (int) (Math.random() * (allQuizzes.size() - 1));
+        Quiz chosenQuiz = allQuizzes.get(randomIndex);
+        return "redirect:view/" + chosenQuiz.getId();
+    }
+
 
     @GetMapping("create")
     public String renderCreateQuizForm(Model model) {

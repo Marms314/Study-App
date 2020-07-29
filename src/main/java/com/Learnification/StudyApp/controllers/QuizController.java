@@ -42,7 +42,7 @@ public class QuizController {
         if (optQuiz.isPresent()) {
             Quiz quiz = (Quiz) optQuiz.get();
             model.addAttribute("title", quiz.getName());
-            model.addAttribute("flashCards", quiz.getQuestions());
+            model.addAttribute("questions", quiz.getQuestions());
             return "quiz/view";
         }
 

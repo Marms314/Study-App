@@ -3,7 +3,6 @@ package com.Learnification.StudyApp.controllers;
 import com.Learnification.StudyApp.models.CardDeck;
 import com.Learnification.StudyApp.models.FlashCard;
 import com.Learnification.StudyApp.models.data.CardDeckRepository;
-import com.Learnification.StudyApp.models.data.CategoryRepository;
 import com.Learnification.StudyApp.models.data.FlashCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +24,6 @@ public class FlashCardController {
     @Autowired
     private FlashCardRepository flashCardRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
 
     @RequestMapping(value={"", "/index"})
     public String index(Model model) {
@@ -55,7 +52,6 @@ public class FlashCardController {
     public String renderCreateCardDeckForm(Model model) {
 
         model.addAttribute("title", "New Card Deck");
-        model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute(new CardDeck());
 
         return "flashcard/create";
@@ -67,7 +63,6 @@ public class FlashCardController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("title", "New Card Deck");
-            model.addAttribute("categories", categoryRepository.findAll());
             return "flashcard/create";
         }
 
@@ -82,7 +77,6 @@ public class FlashCardController {
 
         if (flashCardParams.containsValue("") || flashCardParams.containsValue(null)) {
             model.addAttribute("title", "New Card Deck");
-            model.addAttribute("categories", categoryRepository.findAll());
             model.addAttribute("cardError", true);
             return "flashcard/create";
         }

@@ -20,12 +20,12 @@
             <table class="table table-striped">
                 <tr>
                     <th scope="col">Quiz Name</th>
-                    <th scope="col">Category</th>
+                    <th scope="col">Description</th>
                     <th scope="col">Delete?</th>
                 </tr>
                 <tr th:each="quiz : ${quizzes}">
                     <td th:text="${quiz.name}"></td>
-                    <td th:text="${quiz.category}"></td>
+                    <td th:text="${quiz.description}"></td>
                     <td><input type="checkbox" name="quizIds" th:value="${quiz.id}"></td>
                 </tr>
             </table>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body class="bg-light">
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+    <h2 class="text-success my-3" th:text="${title}"></h2>
+
+    <p class="h4" th:classappend="${isGoodScore} ? text-success : text-danger">
+        You scored
+        <span class="h3" th:text="${scoreText}"></span>
+    </p>
+    <p class="h4" th:text="${isGoodScore} ? 'Great job!' : 'Better luck next time.'"></p>
+
+</div>
+
+<div th:replace="fragments :: scripts"></div>
+
+</body>
+</html>

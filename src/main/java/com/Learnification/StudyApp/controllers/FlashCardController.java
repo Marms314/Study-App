@@ -34,6 +34,7 @@ public class FlashCardController {
         return "flashcard/index";
     }
 
+
     @RequestMapping("view/{cardDeckId}")
     public String renderFlashCardDeck(Model model, @PathVariable int cardDeckId) {
 
@@ -48,6 +49,16 @@ public class FlashCardController {
         return "flashcard/index";
     }
 
+
+    @GetMapping("random")
+    public String chooseRandomCardDeck(Model model) {
+        List<CardDeck> allCardDecks = (ArrayList<CardDeck>) cardDeckRepository.findAll();
+        int randomIndex = (int) (Math.random() * (allCardDecks.size() - 1));
+        CardDeck chosenDeck = allCardDecks.get(randomIndex);
+        return "redirect:view/" + chosenDeck.getId();
+    }
+
+
     @GetMapping("create")
     public String renderCreateCardDeckForm(Model model) {
 
@@ -56,6 +67,7 @@ public class FlashCardController {
 
         return "flashcard/create";
     }
+
 
     @PostMapping("create")
     public String processCreateCardDeckForm(@ModelAttribute @Valid CardDeck cardDeck, BindingResult bindingResult,
@@ -95,6 +107,7 @@ public class FlashCardController {
         return "redirect:index";
     }
 
+
     @GetMapping("manage")
     public String renderManageCardDeckForm(Model model) {
 
@@ -105,6 +118,7 @@ public class FlashCardController {
 
         return "flashcard/manage";
     }
+
 
     @PostMapping("manage")
     public String processManageCardDeckForm(@RequestParam(required = false) int[] cardDeckIds, Model model) {

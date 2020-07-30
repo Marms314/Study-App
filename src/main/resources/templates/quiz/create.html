@@ -29,14 +29,14 @@
             <p th:if="${questionError}" class="text-danger">All fields must be filled.</p>
             <p th:if="${questionError}" class="text-danger">Fields must be between 1 - 100 characters.</p>
 
-            <div id="fieldToAdd" class="form-row my-3">
-                <div class="col">
+            <div id="fieldToAdd" class="form-row my-4">
+                <div class="col-md-3 my-1">
                     <input type="text" name="questionName0" class="form-control" placeholder="Question Text" required>
                 </div>
-                <div class="col">
+                <div class="col-md-3 my-1">
                     <input type="text" name="questionCorrectAnswer0" class="form-control" placeholder="Correct Answer" required>
                 </div>
-                <div class="col">
+                <div class="col-md-3 my-1">
                     <input type="text" name="questionWrongAnswer0" class="form-control" placeholder="Wrong Answer" required>
                 </div>
             </div>

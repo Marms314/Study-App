@@ -1,9 +1,9 @@
 package com.Learnification.StudyApp.models;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,15 +14,16 @@ public class CardDeck extends AbstractEntity {
     @OneToMany(mappedBy = "cardDeck")
     private List<FlashCard> flashcards = new ArrayList<>();
 
-    @ManyToOne
-    private Category category;
+    @NotBlank(message = "Field cannot be blank.")
+    @Size(min = 1, max = 100, message = "Field must be between 1 and 100 characters.")
+    private String description;
 
     public CardDeck() {}
 
-    public CardDeck(List<FlashCard> flashCards, Category category) {
+    public CardDeck(List<FlashCard> flashCards, String description) {
         super();
         this.flashcards = flashCards;
-        this.category = category;
+        this.description = description;
     }
 
     public void addFlashCard(FlashCard flashCard) {
@@ -37,11 +38,12 @@ public class CardDeck extends AbstractEntity {
         this.flashcards = flashcards;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
 }

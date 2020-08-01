@@ -9,150 +9,83 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container body-content">
+    <div class="alert alert-success my-3" role="alert" th:if="${dummyDataAdded}">Example data added successfully.</div>
+
     <div class="mx-auto text-center" style="max-width: 400px;">
         <h2>Hello, welcome to StudyTime!</h2>
         <p>What would you like to do today?</p>
     </div>
 
-
-<!--Top row for quick access to random card deck or quiz-->
     <div class="row">
-        <div class="mx-auto">
-            <div class="card border-primary text-white bg-white mb-3" style="max-width: 18rem;">
+        <div class="mx-auto mb-3">
+            <div class="card border-primary text-white bg-white mb-3 h-100" style="max-width: 18rem;">
                 <div class="card-header bg-primary">Flash Cards</div>
                 <div class="card-body text-primary">
-                    <h5 class="card-title">Random Flash Card Deck</h5>
-                    <p class="card-text">Why not take some time with a random deck of cards?</p>
-                    <a href="#" class="btn btn-primary stretched-link">Let's go!</a>
+                    <h5 class="card-title">View All Card Decks</h5>
+                    <p class="card-text mb-5">Click here to see all the flash card decks.</p>
+                    <a href="/flashcard/index" class="btn btn-primary" style="position: absolute; bottom: 1rem;">Let's go!</a>
                 </div>
             </div>
         </div>
 
-        <div class="mx-auto">
-            <div class="card border-success text-white bg-white mb-3" style="max-width: 18rem;">
-                <div class="card-header bg-success">Quizzes</div>
+        <div class="mx-auto mb-3">
+            <div class="card border-success text-white bg-white mb-3 h-100" style="max-width: 18rem;">
+                <div class="card-header bg-success">Quiz</div>
                 <div class="card-body text-success">
-                    <h5 class="card-title">Random Quiz</h5>
-                    <p class="card-text">Test what you've learned with a random quiz.</p>
-                    <a href="#" class="btn btn-success stretched-link">Let's go!</a>
+                    <h5 class="card-title">View All Quizzes</h5>
+                    <p class="card-text mb-5">Click here to see all the quizzes.</p>
+                    <a href="/quiz/index" class="btn btn-success" style="position: absolute; bottom: 1rem;">Let's go!</a>
                 </div>
             </div>
         </div>
     </div>
 
-<!--Start of smaller cards. Split horizontally with card decks on left and quizzes on right-->
-    <div class="row">
+
+    <!--Start of smaller cards. Split horizontally with card decks on left and quiz on right-->
+    <div class="row mb-3">
         <!--Flash Card decks-->
-        <div class="col-md-6">
-            <div class="row">
-
-                <div class="col">
-                    <div class="card text-primary bg-secondary mb-3" style="max-width: 15rem; height: 95%;">
-                        <div class="card-header bg-dark">Flash Cards</div>
-                        <div class="card-body text-white">
-                            <h5 class="card-title">One</h5>
-                            <p class="card-text">This will be a nice description of what this card will lead to.</p>
-                            <a href="#" class="btn btn-primary stretched-link">Let's go!</a>
-                        </div>
-                    </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" th:if = "${cardDecksExist}">
+            <div class="card text-primary bg-secondary mb-3 h-100 mx-auto" style="max-width: 15rem;">
+                <div class="card-header bg-dark">Flash Cards</div>
+                <div class="card-body text-white">
+                    <h5 class="card-title">Choose for Me</h5>
+                    <p class="card-text mb-5">Click here to be taken to a random deck of flash cards.</p>
+                    <a href="/flashcard/random" class="btn btn-primary" style="position: absolute; bottom: 1rem;">Let's go!</a>
                 </div>
-
-                <div class="col">
-                    <div class="card text-primary bg-secondary mb-3" style="max-width: 15rem; height: 95%;">
-                        <div class="card-header bg-dark">Flash Cards</div>
-                        <div class="card-body text-white">
-                            <h5 class="card-title">Two</h5>
-                            <p class="card-text">This will be a nice description of what this card will lead to.</p>
-                            <a href="#" class="btn btn-primary stretched-link">Let's go!</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col">
-                    <div class="card text-primary bg-secondary mb-3" style="max-width: 15rem; height: 95%;">
-                        <div class="card-header bg-dark">Flash Cards</div>
-                        <div class="card-body text-white">
-                            <h5 class="card-title">Three</h5>
-                            <p class="card-text">This will be a nice description of what this card will lead to.</p>
-                            <a href="#" class="btn btn-primary stretched-link">Let's go!</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card text-primary bg-secondary mb-3" style="max-width: 15rem; height: 95%;">
-                        <div class="card-header bg-dark">Flash Cards</div>
-                        <div class="card-body text-white">
-                            <h5 class="card-title">Four</h5>
-                            <p class="card-text">This will be a nice description of what this card will lead to.</p>
-                            <a href="#" class="btn btn-primary stretched-link">Let's go!</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
-
-        <!--Quizzes-->
-        <div class="col-md-6">
-            <div class="row">
-
-                <div class="col">
-                    <div class="card text-success bg-secondary mb-3" style="max-width: 15rem; height: 95%;">
-                        <div class="card-header bg-dark">Quizzes</div>
-                        <div class="card-body text-white">
-                            <h5 class="card-title">One</h5>
-                            <p class="card-text">This will be a nice description of what this card will lead to.</p>
-                            <a href="#" class="btn btn-success stretched-link">Let's go!</a>
-                        </div>
-                    </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" th:each="cardDeck : ${cardDecks}">
+            <div class="card text-primary bg-secondary mb-3 h-100 mx-auto" style="max-width: 15rem;">
+                <div class="card-header bg-dark">Flash Cards</div>
+                <div class="card-body text-white">
+                    <h5 class="card-title" th:text="${cardDeck.name}"></h5>
+                    <p class="card-text mb-5" th:text="${cardDeck.description}"></p>
+                    <a th:href="@{'/flashcard/view/' + ${cardDeck.id}}" class="btn btn-primary" style="position: absolute; bottom: 1rem;">Let's go!</a>
                 </div>
-
-                <div class="col">
-                    <div class="card text-success bg-secondary mb-3" style="max-width: 15rem; height: 95%;">
-                        <div class="card-header bg-dark">Quizzes</div>
-                        <div class="card-body text-white">
-                            <h5 class="card-title">Two</h5>
-                            <p class="card-text">This will be a nice description of what this card will lead to.</p>
-                            <a href="#" class="btn btn-success stretched-link">Let's go!</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
-            <div class="row">
-
-                <div class="col">
-                    <div class="card text-success bg-secondary mb-3" style="max-width: 15rem; height: 95%;">
-                        <div class="card-header bg-dark">Quizzes</div>
-                        <div class="card-body text-white">
-                            <h5 class="card-title">Three</h5>
-                            <p class="card-text">This will be a nice description of what this card will lead to.</p>
-                            <a href="#" class="btn btn-success stretched-link">Let's go!</a>
-                        </div>
-                    </div>
+        </div>
+        <!--Quiz-->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" th:if = "${quizzesExist}">
+            <div class="card text-success bg-secondary mb-3 h-100 mx-auto" style="max-width: 15rem;">
+                <div class="card-header bg-dark">Quiz</div>
+                <div class="card-body text-white">
+                    <h5 class="card-title">Choose for Me</h5>
+                    <p class="card-text mb-5">Click here to be taken to a random quiz.</p>
+                    <a href="/quiz/random" class="btn btn-success" style="position: absolute; bottom: 1rem;">Let's go!</a>
                 </div>
-
-                <div class="col">
-                    <div class="card text-success bg-secondary mb-3" style="max-width: 15rem; height: 95%;">
-                        <div class="card-header bg-dark">Quizzes</div>
-                        <div class="card-body text-white">
-                            <h5 class="card-title">Four</h5>
-                            <p class="card-text">This will be a nice description of what this card will lead to.</p>
-                            <a href="#" class="btn btn-success stretched-link">Let's go!</a>
-                        </div>
-                    </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" th:each="quiz : ${quizzes}">
+            <div class="card text-success bg-secondary mb-3 h-100 mx-auto" style="max-width: 15rem;">
+                <div class="card-header bg-dark">Quiz</div>
+                <div class="card-body text-white">
+                    <h5 class="card-title" th:text="${quiz.name}"></h5>
+                    <p class="card-text mb-5" th:text="${quiz.description}"></p>
+                    <a th:href="@{'/quiz/view/' + ${quiz.id}}" class="btn btn-success" style="position: absolute; bottom: 1rem;">Let's go!</a>
                 </div>
-
             </div>
         </div>
     </div>
-
 </div>
 
 <div th:replace="fragments :: scripts"></div>

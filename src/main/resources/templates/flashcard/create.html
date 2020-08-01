@@ -9,7 +9,7 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container">
-    <h1 class="text-primary" >Add New Flash Card Deck</h1>
+    <h2 class="text-primary my-3">Add New Flash Card Deck</h2>
 
     <form method="post">
         <div class="form-group">
@@ -17,12 +17,11 @@
             <input th:field="${cardDeck.name}" class="form-control" id="cardDeckName" placeholder="Enter new deck name" required>
             <span th:errors="${cardDeck.name}" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label for="cardDeckCategory">Deck Category</label>
-            <select class="form-control" id="cardDeckCategory" th:field="*{cardDeck.category}">
-                <option th:each="category : ${categories}" th:text="${category}" th:value="${category.id}"></option>
-            </select>
-            <a th:href="@{'/category/create'}">Add Category</a>
+            <label for="cardDeckDescription">Card Deck Description</label>
+            <input th:field="${cardDeck.description}" class="form-control" id="cardDeckDescription" placeholder="Describe the card deck" required>
+            <span th:errors="${cardDeck.description}" class="text-danger"></span>
         </div>
 
         <div class="p-5 border border-primary form-group">
@@ -31,10 +30,10 @@
             <p th:if="${cardError}" class="text-danger">Fields must be between 1 - 100 characters.</p>
 
             <div id="fieldToAdd" class="form-row my-3">
-                <div class="col">
+                <div class="col-md-4 my-1">
                     <input name="flashCardName0" class="form-control" placeholder="Front of card" required>
                 </div>
-                <div class="col">
+                <div class="col-md-4 my-1">
                     <input name="flashCardReverseSide0" class="form-control" placeholder="Back of card" required>
                 </div>
             </div>

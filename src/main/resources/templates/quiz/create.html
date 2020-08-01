@@ -9,7 +9,7 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container">
-    <h1 class="text-success">Add New Quiz</h1>
+    <h2 class="text-success">Add New Quiz</h2>
 
     <form method="post">
         <div class="form-group">
@@ -17,12 +17,11 @@
             <input th:field="${quiz.name}" class="form-control" id="quizName" placeholder="Enter new quiz name" required>
             <span th:errors="${quiz.name}" class="text-danger"></span>
         </div>
+
         <div class="form-group">
-            <label for="quizCategory">Quiz Category</label>
-            <select class="form-control" id="quizCategory" th:field="*{quiz.category}">
-                <option th:each="category : ${categories}" th:text="${category}" th:value="${category.id}"></option>
-            </select>
-            <a th:href="@{'/category/create'}">Add Category</a>
+            <label for="quizDescription">Quiz Description</label>
+            <input th:field="${quiz.description}" class="form-control" id="quizDescription" placeholder="Describe the quiz" required>
+            <span th:errors="${quiz.description}" class="text-danger"></span>
         </div>
 
         <div class="p-5 border border-success form-group">
@@ -30,14 +29,14 @@
             <p th:if="${questionError}" class="text-danger">All fields must be filled.</p>
             <p th:if="${questionError}" class="text-danger">Fields must be between 1 - 100 characters.</p>
 
-            <div id="fieldToAdd" class="form-row my-3">
-                <div class="col">
+            <div id="fieldToAdd" class="form-row my-4">
+                <div class="col-md-3 my-1">
                     <input type="text" name="questionName0" class="form-control" placeholder="Question Text" required>
                 </div>
-                <div class="col">
+                <div class="col-md-3 my-1">
                     <input type="text" name="questionCorrectAnswer0" class="form-control" placeholder="Correct Answer" required>
                 </div>
-                <div class="col">
+                <div class="col-md-3 my-1">
                     <input type="text" name="questionWrongAnswer0" class="form-control" placeholder="Wrong Answer" required>
                 </div>
             </div>

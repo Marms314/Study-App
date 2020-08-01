@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body class="bg-light">
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+    <h2 class="text-success my-3" th:text="${title}"></h2>
+    <p th:if="${answerError}" class="text-danger">All questions must be answered.</p>
+
+    <form method="post">
+        <div class="form-group px-3" th:each="question,iStat : ${questions}">
+            <p th:text="${iStat.count} + '. ' + ${question.name}" class="h5"></p>
+            <div class="answersDiv">
+                <div class="form-check px-5 answer">
+                    <input type="radio" th:name="${question.id}" th:id="${question.wrongAnswer}" th:value="${question.wrongAnswer}" class="form-check-input" required/>
+                    <label th:for="${question.wrongAnswer}" th:text="${question.wrongAnswer}" class="form-check-label">Wrong answer text</label>
+                </div>
+
+                <div class="form-check px-5 answer">
+                    <input type="radio" th:name="${question.id}" th:id="${question.correctAnswer}" th:value="${question.correctAnswer}" class="form-check-input" required/>
+                    <label th:for="${question.correctAnswer}" th:text="${question.correctAnswer}" class="form-check-label">Correct answer text</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success mx-auto" >Submit</button>
+    </form>
+
+
+</div>
+
+<div th:replace="fragments :: scripts"></div>
+
+</body>
+</html>

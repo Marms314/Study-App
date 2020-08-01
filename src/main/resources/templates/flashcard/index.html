@@ -9,7 +9,46 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container body-content">
-    <h2>Flashcards Index</h2>
+    <h2 class="text-primary my-3">Flash Cards</h2>
+
+<!--Top row of 2 cards-->
+    <div class="row">
+        <div class="mx-auto mb-3">
+            <div class="card border-primary text-white bg-white mb-3 h-100" style="max-width: 18rem;">
+                <div class="card-header bg-primary">Flash Cards</div>
+                <div class="card-body text-primary">
+                    <h5 class="card-title">Create New Card Deck</h5>
+                    <p class="card-text mb-5">Need to add a new deck of flash cards?</p>
+                    <a href="create" class="btn btn-primary" style="position: absolute; bottom: 1rem;">Let's go!</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-auto mb-3">
+            <div class="card border-primary text-white bg-white mb-3 h-100" style="max-width: 18rem;">
+                <div class="card-header bg-primary">Flash Cards</div>
+                <div class="card-body text-primary">
+                    <h5 class="card-title">Manage Card Decks</h5>
+                    <p class="card-text mb-5">Is there a deck of flash cards you no longer need?</p>
+                    <a href="manage" class="btn btn-primary" style="position: absolute; bottom: 1rem;">Let's go!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--All deck cards-->
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" th:each="cardDeck : ${cardDecks}">
+            <div class="card text-primary bg-secondary mb-3 h-100 mx-auto" style="max-width: 15rem;">
+                <div class="card-header bg-dark">Flash Cards</div>
+                <div class="card-body text-white">
+                    <h5 class="card-title" th:text="${cardDeck.name}"></h5>
+                    <p class="card-text mb-5" th:text="${cardDeck.description}"></p>
+                    <a th:href="@{'view/' + ${cardDeck.id}}" class="btn btn-primary" style="position: absolute; bottom: 1rem;">Let's go!</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 

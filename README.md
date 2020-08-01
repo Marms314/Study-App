@@ -1,8 +1,8 @@
 # StudyTime
 
-An app that enables studying through flash cards and quizzes. It was built with primarily Java using Spring, 
-Spring Security for user login, Spring Data JPA to connect to a MySQL database, Thymeleaf for views, and uses Bootstrap
- for style and responsiveness.
+An app that enables studying through flash cards and quizzes. It was built primarily with Java using Spring. It includes 
+Spring Security for user login and Spring Data JPA to connect to a MySQL database. Uses Thymeleaf for views, and  
+Bootstrap for style and responsiveness.
 
 
 
@@ -52,7 +52,7 @@ After flash cards or quizzes are added either with the dummy data shortcut or ma
 
 ![The home page as of 2020-31-07](src/screenshots/home-with-data-20203107.PNG)
 
-The flash card and quiz index pages are set up the same. The top card allow you to create and delete, and all quizzes and
+The flash card and quiz index pages are set up the same. The top cards allow you to create and delete, and all quizzes and
  flashcard decks will display below.
  
 ![The home page as of 2020-31-07](src/screenshots/flash-cards-with-data-20203107.PNG)
@@ -102,7 +102,7 @@ to classes or individual users.
 
 * Ability for user to add quizzes and flash card decks with dynamic forms. _completed 7/22/2020_
 
-* Ability for user delete quizzes and flash card decks. _completed 7/22/2020_
+* Ability for user to delete quizzes and flash card decks. _completed 7/22/2020_
 
 * Ability to add dummy data. _completed 7/27/2020_
 

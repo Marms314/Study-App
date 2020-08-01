@@ -1,4 +1,4 @@
-#StudyTime
+# StudyTime
 
 An app that enables studying through flash cards and quizzes. It was built with primarily Java using Spring, 
 Spring Security for user login, Spring Data JPA to connect to a MySQL database, Thymeleaf for views, and uses Bootstrap
@@ -6,14 +6,14 @@ Spring Security for user login, Spring Data JPA to connect to a MySQL database, 
 
 
 
-##How to Run This Repo
-###Requirements
+## How to Run This Repo
+### Requirements
 1. Java JDK 14
 2. MySQL database set up on your local machine
 3. IntelliJ or similar IDE
 
 
-###Instructions
+### Instructions
 1. Clone or download repo to your local machine.
 2. Set up a MySQL schema with the name of your choice. Set up a user with access to the schema.
 3. Open the project in your IDE of choice and navigate to Study-App\src\main\resources\application.properties
@@ -37,7 +37,7 @@ Spring Security for user login, Spring Data JPA to connect to a MySQL database, 
 
 
 
-##Overview of the App
+## Overview of the App
 
 The home page of the app on start-up will have a navigation bar at the top and 2 cards. Clicking the StudyTime brand in 
  the nav bar will lead back to the home page of the app. Clicking the hamburger menu in the upper right opens the nav bar.
@@ -70,8 +70,8 @@ navigate through them.
 
 
 
-##Features
-###Future Features
+## Features
+### Future Features
 
 These features are in the order that they will be completed. As they are completed they will be removed and added to the
  completed list.
@@ -94,7 +94,7 @@ These features are in the order that they will be completed. As they are complet
 to classes or individual users.
 
 
-###Completed Features
+### Completed Features
 
 * Bootstrap carousel with custom flipping flash cards. _completed 7/21/2020_
 

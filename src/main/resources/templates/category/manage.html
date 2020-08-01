@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body class="bg-light">
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+    <h2 class="text-dark">Manage Categories</h2>
+    <div class="alert alert-success" role="alert" th:if="${categoryWasDeleted}">Category was deleted.</div>
+    <div class="alert alert-danger" role="alert" th:if="${noIdsSelected}">Please select the categories to delete.</div>
+
+    <p th:unless="${categoriesExist}">Nothing to manage!</p>
+
+    <div th:if="${categoriesExist}">
+        <form method="post">
+            <table class="table table-striped">
+                <tr>
+                    <th scope="col">Category</th>
+                    <th scope="col">Delete?</th>
+                </tr>
+                <tr th:each="category : ${categories}">
+                    <td th:text="${category.name}"></td>
+                    <td><input type="checkbox" name="categoryIds" th:value="${category.id}"></td>
+                </tr>
+            </table>
+
+            <input type="submit" value="Delete" class="btn btn-danger">
+        </form>
+    </div>
+
+</div>
+
+<div th:replace="fragments :: scripts"></div>
+
+</body>
+</html>

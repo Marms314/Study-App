@@ -10,10 +10,10 @@ import java.util.List;
 @Entity
 public class Category extends AbstractEntity {
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany
     private List<Quiz> quizzes = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany
     private List<CardDeck> cardDecks = new ArrayList<>();
 
     public Category() {}
@@ -28,8 +28,8 @@ public class Category extends AbstractEntity {
         this.quizzes.add(quiz);
     }
 
-    public void addCardDeck(Quiz cardDeck) {
-        this.quizzes.add(cardDeck);
+    public void addCardDeck(CardDeck cardDeck) {
+        this.cardDecks.add(cardDeck);
     }
 
     public List<Quiz> getQuizzes() {

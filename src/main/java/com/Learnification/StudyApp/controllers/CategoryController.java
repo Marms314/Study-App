@@ -59,7 +59,7 @@ public class CategoryController {
     }
 
     @PostMapping("manage")
-    public String processManageCategoriesForm(@RequestParam(required = false) int[] categoryIds, @RequestParam String deleteAcknowledgement, Model model) {
+    public String processManageCategoriesForm(@RequestParam(required = false) int[] categoryIds, Model model) {
 
         if (categoryIds != null) {
 

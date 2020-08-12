@@ -1,13 +1,7 @@
 package com.Learnification.StudyApp;
 
-import com.Learnification.StudyApp.models.CardDeck;
-import com.Learnification.StudyApp.models.FlashCard;
-import com.Learnification.StudyApp.models.Question;
-import com.Learnification.StudyApp.models.Quiz;
-import com.Learnification.StudyApp.models.data.CardDeckRepository;
-import com.Learnification.StudyApp.models.data.FlashCardRepository;
-import com.Learnification.StudyApp.models.data.QuestionRepository;
-import com.Learnification.StudyApp.models.data.QuizRepository;
+import com.Learnification.StudyApp.models.*;
+import com.Learnification.StudyApp.models.data.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +9,12 @@ import java.util.List;
 public class DummyDatabaseData {
 
     public void addData(QuizRepository quizRepository, CardDeckRepository cardDeckRepository,
-                        QuestionRepository questionRepository, FlashCardRepository flashCardRepository) {
+                        QuestionRepository questionRepository, FlashCardRepository flashCardRepository,
+                        CategoryRepository categoryRepository) {
+        Category dummyDataCategory = new Category();
+        dummyDataCategory.setName("Dummy Data");
+        categoryRepository.save(dummyDataCategory);
+
         for (int i = 1; i < 11; i++) {
             String name = "Multiples of " + i;
             String description = " your knowledge of multiplication using the number " + i;
@@ -30,6 +29,9 @@ public class DummyDatabaseData {
 
             quizRepository.save(quiz);
             cardDeckRepository.save(cardDeck);
+
+            dummyDataCategory.addCardDeck(cardDeck);
+            dummyDataCategory.addQuiz(quiz);
 
             List<Question> questions = new ArrayList<>();
             List<FlashCard> flashCards = new ArrayList<> ();

@@ -1,7 +1,9 @@
 package com.Learnification.StudyApp.controllers;
 
+import com.Learnification.StudyApp.models.Category;
 import com.Learnification.StudyApp.models.Question;
 import com.Learnification.StudyApp.models.Quiz;
+import com.Learnification.StudyApp.models.data.CategoryRepository;
 import com.Learnification.StudyApp.models.data.QuestionRepository;
 import com.Learnification.StudyApp.models.data.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class QuizController {
     @Autowired
     private QuestionRepository questionRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @RequestMapping(value={"", "/index"})
     public String index(Model model) {
@@ -103,6 +107,7 @@ public class QuizController {
     public String renderCreateQuizForm(Model model) {
 
         model.addAttribute("title", "New Quiz");
+        model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute(new Quiz());
         return "quiz/create";
     }
@@ -113,6 +118,7 @@ public class QuizController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("title", "New Quiz");
+            model.addAttribute("categories", categoryRepository.findAll());
             return "quiz/create";
         }
 
@@ -127,11 +133,17 @@ public class QuizController {
 
         if (questionParams.containsValue("") || questionParams.containsValue(null)) {
             model.addAttribute("title", "New Quiz");
+            model.addAttribute("categories", categoryRepository.findAll());
             model.addAttribute("questionError", true);
             return "quiz/create";
         }
 
         quizRepository.save(quiz);
+
+        Set<Category> categories = quiz.getCategories();
+        for (Category category : categories) {
+            category.addQuiz(quiz);
+        }
 
         List<Question> questions = new ArrayList<>();
         for (int i = 0; i < (questionParams.size() / 3); i++) {

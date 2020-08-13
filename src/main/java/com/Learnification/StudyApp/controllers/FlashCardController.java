@@ -124,17 +124,16 @@ public class FlashCardController {
     public String processManageCardDeckForm(@RequestParam(required = false) int[] cardDeckIds, Model model) {
 
         if (cardDeckIds != null) {
-            ArrayList<FlashCard> flashCards = (ArrayList<FlashCard>) flashCardRepository.findAll();
-
             for (int id : cardDeckIds) {
-                CardDeck currentCardDeck = cardDeckRepository.findById(id).get();
-                for (FlashCard flashCard : flashCards) {
-                    CardDeck flashCardCardDeck = flashCard.getCardDeck();
-                    if (flashCardCardDeck.equals(currentCardDeck)) {
-                        flashCardRepository.delete(flashCard);
-                    }
+                Optional<CardDeck> cardDeckOptional = cardDeckRepository.findById(id);
+                if (cardDeckOptional.isPresent()) {
+                    CardDeck currentCardDeck = cardDeckOptional.get();
+                    List<FlashCard> flashCards = currentCardDeck.getFlashcards();
+                    currentCardDeck.removeAllCategories();
+                    flashCardRepository.deleteAll(flashCards);
+                    cardDeckRepository.delete(currentCardDeck);
                 }
-                cardDeckRepository.delete(currentCardDeck);
+
             }
 
             boolean cardDecksExist = cardDeckRepository.count() != 0;

@@ -6,7 +6,9 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -20,7 +22,7 @@ public class CardDeck extends AbstractEntity {
     private String description;
 
     @ManyToMany(mappedBy = "cardDecks")
-    private List<Category> categories = new ArrayList<>();
+    private Set<Category> categories = new HashSet<>();
 
     public CardDeck() {}
 
@@ -50,11 +52,28 @@ public class CardDeck extends AbstractEntity {
         this.description = description;
     }
 
-    public List<Category> getCategories() {
+    public void addCategory(Category category) {
+        this.categories.add(category);
+        category.addCardDeck(this);
+    }
+
+    public void removeCategory(Category category) {
+        this.categories.remove(category);
+        category.getCardDecks().remove(this);
+    }
+
+    public void removeAllCategories() {
+        for (Category category : this.categories) {
+            category.removeCardDeck(this);
+        }
+        this.categories.removeAll(this.categories);
+    }
+
+    public Set<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
 }

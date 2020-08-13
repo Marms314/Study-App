@@ -160,17 +160,15 @@ public class QuizController {
     public String processManageQuizForm(@RequestParam(required = false) int[] quizIds, Model model) {
 
         if (quizIds != null) {
-            ArrayList<Question> questions = (ArrayList<Question>) questionRepository.findAll();
-
             for (int id : quizIds) {
-                Quiz currentQuiz = quizRepository.findById(id).get();
-                for (Question question : questions) {
-                    Quiz questionQuiz = question.getQuiz();
-                    if (questionQuiz.equals(currentQuiz)) {
-                        questionRepository.delete(question);
-                    }
+                Optional<Quiz> quizOptional = quizRepository.findById(id);
+                if (quizOptional.isPresent()) {
+                    Quiz currentQuiz = quizOptional.get();
+                    List<Question> questions = currentQuiz.getQuestions();
+                    currentQuiz.removeAllCategories();
+                    questionRepository.deleteAll(questions);
+                    quizRepository.delete(currentQuiz);
                 }
-                quizRepository.delete(currentQuiz);
             }
 
             boolean quizzesExist = quizRepository.count() != 0;

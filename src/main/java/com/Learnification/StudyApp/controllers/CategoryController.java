@@ -26,6 +26,21 @@ public class CategoryController {
         return "category/index";
     }
 
+    @RequestMapping("view/{categoryId}")
+    public String renderCategory(Model model, @PathVariable int categoryId) {
+
+        Optional optCategory = categoryRepository.findById(categoryId);
+        if (optCategory.isPresent()) {
+            Category category = (Category) optCategory.get();
+            model.addAttribute("title", category.getName());
+            model.addAttribute("cardDecks", category.getCardDecks());
+            model.addAttribute("quizzes", category.getQuizzes());
+            return "category/view";
+        }
+
+        return "category/index";
+    }
+
     @GetMapping("create")
     public String renderCreateCategoryForm(Model model) {
 

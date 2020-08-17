@@ -51,7 +51,7 @@ public class FlashCardController {
             return "flashcard/view";
         }
 
-        return "flashcard/index";
+        return "redirect:/flashcard/index";
     }
 
 

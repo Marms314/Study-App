@@ -38,7 +38,7 @@ public class CategoryController {
             return "category/view";
         }
 
-        return "category/index";
+        return "redirect:/category/index";
     }
 
     @GetMapping("create")

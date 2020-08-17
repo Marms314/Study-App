@@ -50,7 +50,7 @@ public class QuizController {
             return "quiz/viewForm";
         }
 
-        return "quiz/index";
+        return "redirect:/quiz/index";
     }
 
 

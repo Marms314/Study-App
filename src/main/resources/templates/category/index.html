@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body class="bg-light">
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+    <h2 class="text-dark my-3">Categories</h2>
+
+<!--Top row of 2 cards-->
+    <div class="row">
+        <div class="mx-auto mb-3">
+            <div class="card border-dark text-white bg-white mb-3 h-100" style="max-width: 18rem;">
+                <div class="card-header bg-dark">Category</div>
+                <div class="card-body text-dark">
+                    <h5 class="card-title">Create New Category</h5>
+                    <p class="card-text mb-5">Need to add a new category? This is the place to do it!</p>
+                    <a href="create" class="btn btn-dark" style="position: absolute; bottom: 1rem;">Let's go!</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-auto mb-3">
+            <div class="card border-dark text-white bg-white mb-3 h-100" style="max-width: 18rem;">
+                <div class="card-header bg-dark">Category</div>
+                <div class="card-body text-dark">
+                    <h5 class="card-title">Manage Categories</h5>
+                    <p class="card-text mb-5">Is there a category you no longer need?</p>
+                    <a href="manage" class="btn btn-dark" style="position: absolute; bottom: 1rem;">Let's go!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--All category cards-->
+    <div class="row">
+        <div class="col-xs-12 col-lg-3 mb-3" th:each="category : ${categories}">
+            <div class="card text-white bg-secondary mb-3 h-100" style="max-width: 15rem; height: 95%;">
+                <div class="card-header bg-dark">Category</div>
+                <div class="card-body text-white">
+                    <h5 class="card-title" th:text="${category.name}"></h5>
+                    <p class="card-text" th:text="${#lists.size(category.quizzes)} + ' Quizzes'"></p>
+                    <p class="card-text mb-5" th:text="${#lists.size(category.cardDecks)} + ' Flash Card Decks'"></p>
+                    <a th:href="@{'/category/view/' + ${category.id}}" class="btn btn-dark" style="position: absolute; bottom: 1rem;">Let's go!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments :: scripts"></div>
+
+</body>
+</html>

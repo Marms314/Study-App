@@ -3,10 +3,7 @@ package com.Learnification.StudyApp.controllers;
 import com.Learnification.StudyApp.DummyDatabaseData;
 import com.Learnification.StudyApp.models.CardDeck;
 import com.Learnification.StudyApp.models.Quiz;
-import com.Learnification.StudyApp.models.data.CardDeckRepository;
-import com.Learnification.StudyApp.models.data.FlashCardRepository;
-import com.Learnification.StudyApp.models.data.QuestionRepository;
-import com.Learnification.StudyApp.models.data.QuizRepository;
+import com.Learnification.StudyApp.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +26,8 @@ public class HomeController {
 
     @Autowired
     private FlashCardRepository flashCardRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -74,7 +73,7 @@ public class HomeController {
     @RequestMapping("add-dummy-data")
     public String dummyData(Model model) {
         DummyDatabaseData dummyDatabaseData = new DummyDatabaseData();
-        dummyDatabaseData.addData(quizRepository, cardDeckRepository, questionRepository, flashCardRepository);
+        dummyDatabaseData.addData(quizRepository, cardDeckRepository, questionRepository, flashCardRepository, categoryRepository);
         return "redirect:";
     }
 

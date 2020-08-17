@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body class="bg-light">
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+    <h2 class="text-primary my-3" th:text="${title}"></h2>
+    <a href="#quizzes">Jump to Quizzes</a>
+
+    <!--Deck cards-->
+    <h3 class="text-dark">Flash Card Decks</h3>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" th:each="cardDeck : ${cardDecks}">
+            <div class="card text-primary bg-secondary mb-3 h-100 mx-auto" style="max-width: 15rem;">
+                <div class="card-header bg-dark">Flash Cards</div>
+                <div class="card-body text-white">
+                    <h5 class="card-title" th:text="${cardDeck.name}"></h5>
+                    <p class="card-text mb-5" th:text="${cardDeck.description}"></p>
+                    <p class="card-text mb-5">
+                        <th:block th:each="category : ${cardDeck.categories}">
+                            <span class="bg-dark px-1 rounded" th:text="${category.name}">Category Names</span>
+                        </th:block>
+                    </p>
+                    <a th:href="@{'/flashcard/view/' + ${cardDeck.id}}" class="btn btn-primary" style="position: absolute; bottom: 1rem;">Let's go!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Quiz cards-->
+    <h3 class="text-dark">Quizzes</h3>
+    <div class="row" id="quizzes">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" th:each="quiz : ${quizzes}">
+            <div class="card text-success bg-secondary mb-3 h-100 mx-auto" style="max-width: 15rem;">
+                <div class="card-header bg-dark">Quiz</div>
+                <div class="card-body text-white">
+                    <h5 class="card-title" th:text="${quiz.name}"></h5>
+                    <p class="card-text mb-5" th:text="${quiz.description}"></p>
+                    <p class="card-text mb-5">
+                        <th:block th:each="category : ${quiz.categories}">
+                            <span class="bg-dark px-1 rounded" th:text="${category.name}">Category Names</span>
+                        </th:block>
+                    </p>
+                    <a th:href="@{'/quiz/view/' + ${quiz.id}}" class="btn btn-success" style="position: absolute; bottom: 1rem;">Let's go!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments :: scripts"></div>
+
+</body>
+</html>

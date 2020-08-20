@@ -55,4 +55,9 @@ public class Category extends AbstractEntity {
     public void setCardDecks(Set<CardDeck> cardDecks) {
         this.cardDecks = cardDecks;
     }
+
+    public boolean contains(String textToCompare) {
+        String categoryInfo = this.toString();
+        return categoryInfo.toLowerCase().contains(textToCompare.toLowerCase());
+    }
 }

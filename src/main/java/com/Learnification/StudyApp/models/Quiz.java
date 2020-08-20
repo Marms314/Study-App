@@ -76,4 +76,14 @@ public class Quiz extends AbstractEntity {
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
+
+    public boolean contains(String textToCompare) {
+        String quizInfo = this.toString();
+        return quizInfo.toLowerCase().contains(textToCompare.toLowerCase());
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + description;
+    }
 }

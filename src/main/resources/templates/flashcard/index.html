@@ -44,6 +44,11 @@
                 <div class="card-body text-white">
                     <h5 class="card-title" th:text="${cardDeck.name}"></h5>
                     <p class="card-text mb-5" th:text="${cardDeck.description}"></p>
+                    <p class="card-text mb-5">
+                        <th:block th:each="category : ${cardDeck.categories}">
+                            <span class="bg-dark px-1 rounded" th:text="${category.name}">Category Names</span>
+                        </th:block>
+                    </p>
                     <a th:href="@{'view/' + ${cardDeck.id}}" class="btn btn-primary" style="position: absolute; bottom: 1rem;">Let's go!</a>
                 </div>
             </div>

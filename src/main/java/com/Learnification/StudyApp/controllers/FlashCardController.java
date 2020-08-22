@@ -1,8 +1,10 @@
 package com.Learnification.StudyApp.controllers;
 
 import com.Learnification.StudyApp.models.CardDeck;
+import com.Learnification.StudyApp.models.Category;
 import com.Learnification.StudyApp.models.FlashCard;
 import com.Learnification.StudyApp.models.data.CardDeckRepository;
+import com.Learnification.StudyApp.models.data.CategoryRepository;
 import com.Learnification.StudyApp.models.data.FlashCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class FlashCardController {
 
     @Autowired
     private FlashCardRepository flashCardRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
 
     @RequestMapping(value={"", "/index"})
@@ -46,7 +51,7 @@ public class FlashCardController {
             return "flashcard/view";
         }
 
-        return "flashcard/index";
+        return "redirect:/flashcard/index";
     }
 
 
@@ -63,6 +68,7 @@ public class FlashCardController {
     public String renderCreateCardDeckForm(Model model) {
 
         model.addAttribute("title", "New Card Deck");
+        model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute(new CardDeck());
 
         return "flashcard/create";
@@ -75,6 +81,7 @@ public class FlashCardController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("title", "New Card Deck");
+            model.addAttribute("categories", categoryRepository.findAll());
             return "flashcard/create";
         }
 
@@ -89,11 +96,17 @@ public class FlashCardController {
 
         if (flashCardParams.containsValue("") || flashCardParams.containsValue(null)) {
             model.addAttribute("title", "New Card Deck");
+            model.addAttribute("categories", categoryRepository.findAll());
             model.addAttribute("cardError", true);
             return "flashcard/create";
         }
 
         cardDeckRepository.save(cardDeck);
+
+        Set<Category> categories = cardDeck.getCategories();
+        for (Category category : categories) {
+            category.addCardDeck(cardDeck);
+        }
 
         List<FlashCard> flashCards = new ArrayList<>();
         for (int i = 0; i < (flashCardParams.size() / 2); i++) {
@@ -124,17 +137,16 @@ public class FlashCardController {
     public String processManageCardDeckForm(@RequestParam(required = false) int[] cardDeckIds, Model model) {
 
         if (cardDeckIds != null) {
-            ArrayList<FlashCard> flashCards = (ArrayList<FlashCard>) flashCardRepository.findAll();
-
             for (int id : cardDeckIds) {
-                CardDeck currentCardDeck = cardDeckRepository.findById(id).get();
-                for (FlashCard flashCard : flashCards) {
-                    CardDeck flashCardCardDeck = flashCard.getCardDeck();
-                    if (flashCardCardDeck.equals(currentCardDeck)) {
-                        flashCardRepository.delete(flashCard);
-                    }
+                Optional<CardDeck> cardDeckOptional = cardDeckRepository.findById(id);
+                if (cardDeckOptional.isPresent()) {
+                    CardDeck currentCardDeck = cardDeckOptional.get();
+                    List<FlashCard> flashCards = currentCardDeck.getFlashcards();
+                    currentCardDeck.removeAllCategories();
+                    flashCardRepository.deleteAll(flashCards);
+                    cardDeckRepository.delete(currentCardDeck);
                 }
-                cardDeckRepository.delete(currentCardDeck);
+
             }
 
             boolean cardDecksExist = cardDeckRepository.count() != 0;

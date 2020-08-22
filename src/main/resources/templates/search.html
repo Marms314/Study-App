@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head">
+
+    <title></title>
+</head>
+<body class="bg-light">
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+
+    <form method="post">
+        <h2 class="text-dark">Search</h2>
+
+        <div class="form-group mb-2 mr-sm-2">
+            <label for="searchText">Search for:</label>
+            <input class="form-control" id="searchText" name="searchText" placeholder="Search..." required>
+            <p th:if="${textError}" class="text-danger">Field cannot be blank.</p>
+        </div>
+
+        <div>Search in:
+            <div class="form-check form-check-inline mb-2 ml-2 mr-sm-2">
+                <input class="form-check-input" type="checkbox" id="quizzes" name="quizzes" checked>
+                <label class="form-check-label" for="quizzes">Quizzes</label>
+            </div>
+            <div class="form-check form-check-inline mb-2 mr-sm-2">
+                <input class="form-check-input" type="checkbox" id="cardDecks" name="cardDecks" checked>
+                <label class="form-check-label" for="cardDecks">Flash Card Decks</label>
+            </div>
+            <div class="form-check form-check-inline mb-2 mr-sm-2">
+                <input class="form-check-input" type="checkbox" id="categories" name="categories" checked>
+                <label class="form-check-label" for="categories">Categories</label>
+            </div>
+        </div>
+        <p th:if="${searchLocationError}" class="text-danger">Must choose at least 1 location to search.</p>
+
+        <button type="submit" class="btn btn-success mb-2">Search</button>
+    </form>
+
+<div class="container">
+    <div th:if="${quizzesWereRequested}" class="mt-3">
+        <h3 id="quizTable">Quizzes</h3>
+        <p th:if="${hasNoMatchingQuizzes}" class="text-danger">No Quizzes Match</p>
+
+        <div th:unless="${hasNoMatchingQuizzes}">
+            <table class="table table-striped">
+                <tr>
+                    <th scope="col">Quiz Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Navigate</th>
+                </tr>
+                <tr th:each="quiz : ${matchingQuizzes}">
+                    <td th:text="${quiz.name}"></td>
+                    <td th:text="${quiz.description}"></td>
+                    <td><a th:href="@{'/quiz/view/' + ${quiz.id}}" class="btn btn-success">Go</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div th:if="${cardDecksWereRequested}" class="mt-3">
+        <h3 id="cardDeckTable">Card Decks</h3>
+        <p th:if="${hasNoMatchingCardDecks}" class="text-danger">No Card Decks Match</p>
+
+        <div th:unless="${hasNoMatchingCardDecks}">
+            <table class="table table-striped">
+                <tr>
+                    <th scope="col">Card Deck Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Navigate</th>
+                </tr>
+                <tr th:each="cardDeck : ${matchingCardDecks}">
+                    <td th:text="${cardDeck.name}"></td>
+                    <td th:text="${cardDeck.description}"></td>
+                    <td><a th:href="@{'/flashcard/view/' + ${cardDeck.id}}" class="btn btn-primary">Go</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div th:if="${categoriesWereRequested}" class="mt-3">
+        <h3 id="categoryTable">Categories</h3>
+        <p th:if="${hasNoMatchingCategories}" class="text-danger">No Categories Match</p>
+
+        <div th:unless="${hasNoMatchingCategories}">
+            <table class="table table-striped">
+                <tr>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Contents</th>
+                    <th scope="col">Navigate</th>
+                </tr>
+                <tr th:each="category : ${matchingCategories}">
+                    <td th:text="${category.name}"></td>
+                    <td th:text="${#lists.size(category.quizzes)} + ' Quizzes ' + ${#lists.size(category.cardDecks)} + ' Card Decks'"></td>
+                    <td><a th:href="@{'/category/view/' + ${category.id}}" class="btn btn-dark">Go</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+</div>
+
+<div th:replace="fragments :: scripts"></div>
+</body>
+</html>

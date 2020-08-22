@@ -1,17 +1,20 @@
 package com.Learnification.StudyApp.controllers;
 
+import com.Learnification.StudyApp.DatabaseSearch;
 import com.Learnification.StudyApp.DummyDatabaseData;
 import com.Learnification.StudyApp.models.CardDeck;
+import com.Learnification.StudyApp.models.Category;
 import com.Learnification.StudyApp.models.Quiz;
-import com.Learnification.StudyApp.models.data.CardDeckRepository;
-import com.Learnification.StudyApp.models.data.FlashCardRepository;
-import com.Learnification.StudyApp.models.data.QuestionRepository;
-import com.Learnification.StudyApp.models.data.QuizRepository;
+import com.Learnification.StudyApp.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,9 @@ public class HomeController {
 
     @Autowired
     private FlashCardRepository flashCardRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -74,8 +80,72 @@ public class HomeController {
     @RequestMapping("add-dummy-data")
     public String dummyData(Model model) {
         DummyDatabaseData dummyDatabaseData = new DummyDatabaseData();
-        dummyDatabaseData.addData(quizRepository, cardDeckRepository, questionRepository, flashCardRepository);
+        dummyDatabaseData.addData(quizRepository, cardDeckRepository, questionRepository, flashCardRepository, categoryRepository);
         return "redirect:";
+    }
+
+    @GetMapping("search")
+    public String renderSearchForm(Model model) {
+
+        model.addAttribute("title", "Search");
+        return "search";
+    }
+
+    @PostMapping("search")
+    public String processSearchForm(@RequestParam String searchText, Model model, @RequestParam(required = false) String quizzes,
+                                    @RequestParam(required = false) String cardDecks, @RequestParam(required = false) String categories,
+                                    HttpServletRequest request) {
+
+        if (searchText.isBlank() || searchText.isEmpty()) {
+            model.addAttribute("textError", true);
+            model.addAttribute("title", "Search");
+            return "search";
+        }
+
+        boolean quizzesWereRequested = false;
+        boolean cardDecksWereRequested = false;
+        boolean categoriesWereRequested = false;
+        DatabaseSearch databaseSearch = new DatabaseSearch();
+
+        if (request.getParameterMap().containsKey("quizzes")) {
+            quizzesWereRequested = true;
+            ArrayList<Quiz> matchingQuizzes = databaseSearch.findByText(quizRepository, searchText);
+            boolean hasNoMatchingQuizzes = matchingQuizzes.isEmpty();
+
+            model.addAttribute("matchingQuizzes", matchingQuizzes);
+            model.addAttribute("hasNoMatchingQuizzes", hasNoMatchingQuizzes);
+        }
+
+        if (request.getParameterMap().containsKey("cardDecks")) {
+            cardDecksWereRequested = true;
+            ArrayList<CardDeck> matchingCardDecks = databaseSearch.findByText(cardDeckRepository, searchText);
+            boolean hasNoMatchingCardDecks = matchingCardDecks.isEmpty();
+
+            model.addAttribute("matchingCardDecks", matchingCardDecks);
+            model.addAttribute("hasNoMatchingCardDecks", hasNoMatchingCardDecks);
+        }
+
+        if (request.getParameterMap().containsKey("categories")) {
+            categoriesWereRequested = true;
+            ArrayList<Category> matchingCategories = databaseSearch.findByText(categoryRepository, searchText);
+            boolean hasNoMatchingCategories = matchingCategories.isEmpty();
+
+            model.addAttribute("matchingCategories", matchingCategories);
+            model.addAttribute("hasNoMatchingCategories", hasNoMatchingCategories);
+        }
+
+        if ( !(quizzesWereRequested || cardDecksWereRequested || categoriesWereRequested) ) {
+            model.addAttribute("searchLocationError", true);
+            model.addAttribute("title", "Search");
+            return "search";
+        }
+
+        model.addAttribute("quizzesWereRequested", quizzesWereRequested);
+        model.addAttribute("cardDecksWereRequested", cardDecksWereRequested);
+        model.addAttribute("categoriesWereRequested", categoriesWereRequested);
+        model.addAttribute("searchWasDone", true);
+        model.addAttribute("title", "Search for " + searchText);
+        return "search";
     }
 
 }

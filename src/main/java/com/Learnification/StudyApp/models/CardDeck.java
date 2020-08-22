@@ -76,4 +76,14 @@ public class CardDeck extends AbstractEntity {
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
+
+    public boolean contains(String textToCompare) {
+        String deckInfo = this.toString();
+        return deckInfo.toLowerCase().contains(textToCompare.toLowerCase());
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + description;
+    }
 }

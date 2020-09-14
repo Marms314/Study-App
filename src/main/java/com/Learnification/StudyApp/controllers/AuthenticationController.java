@@ -14,4 +14,9 @@ public class AuthenticationController {
         model.addAttribute("loggedOut", loggedOut);
         return "login";
     }
+
+    @RequestMapping("/access-denied")
+    public String accessDenied() {
+        return "403";
+    }
 }

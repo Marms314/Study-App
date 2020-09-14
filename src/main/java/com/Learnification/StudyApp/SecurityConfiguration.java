@@ -25,17 +25,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/flashcard/create", "/flashcard/manage").hasRole("ADMIN")
-                .antMatchers("/quiz/create", "/quiz/manage").hasRole("ADMIN")
-                .antMatchers("/category/create", "/category/manage").hasRole("ADMIN")
-                .antMatchers("/user/create", "/user/manage").hasRole("ADMIN")
+                .antMatchers("/**/create", "/**/manage", "/add-dummy-data").hasRole("ADMIN")
                 .antMatchers("/").hasAnyRole("USER", "ADMIN")
-                .and().formLogin().loginPage("/login")
-                .and().logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/perform-logout"))
-                .logoutSuccessUrl("/login?loggedOut=true")
-                .invalidateHttpSession(true)        // set invalidation state when logout
-                .deleteCookies("JSESSIONID");
+                .and()
+                    .formLogin().loginPage("/login")
+                .and()
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/perform-logout"))
+                    .logoutSuccessUrl("/login?loggedOut=true")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+                .and()
+                    .exceptionHandling().accessDeniedPage("/access-denied");
     }
 
     @Bean

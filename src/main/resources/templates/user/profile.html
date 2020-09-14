@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body class="bg-light">
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+
+    <div class="row">
+        <div class="mt-5 col-sm-12 col-md-6 col-lg-6">
+<!--            User Info / Left Hand Column-->
+            <h4 th:text="'Name: ' + ${name}">REal Name</h4>
+            <p th:text="'Username: ' + ${userName}">UserName</p>
+            <p>Average Quiz Score%</p>
+            <p>Quizzes Taken</p>
+            <p>FlashCard Use</p>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-6">
+<!--            Activity Info / Right Hand Column-->
+            <h5 class="mt-5 mb-3">Recent Activity</h5>
+            <div class="card border-dark mb-3 w-100">
+                <div class="card-header">Header</div>
+                <div class="card-body text-dark">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content. Will be replaced next sprint.</p>
+                </div>
+            </div>
+            <div class="card border-dark mb-3 w-100">
+                <div class="card-header">Header</div>
+                <div class="card-body text-dark">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content. Will be replaced next sprint.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments :: scripts"></div>
+
+</body>
+</html>

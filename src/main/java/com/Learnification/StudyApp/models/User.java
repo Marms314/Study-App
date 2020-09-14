@@ -11,6 +11,7 @@ public class User {
     @GeneratedValue
     private int id;
     private String userName;
+    private String name;
     private String password;
     private boolean active;
     private String roles;
@@ -25,6 +26,14 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {

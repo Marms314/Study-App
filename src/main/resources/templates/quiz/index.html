@@ -12,7 +12,7 @@
     <h2 class="text-success my-3">Quizzes</h2>
 
     <!--Top row of 2 cards-->
-    <div class="row">
+    <div class="row" sec:authorize="hasRole('ADMIN')">
         <div class="mx-auto mb-3">
             <div class="card border-success text-white bg-white mb-3 h-100" style="max-width: 18rem;">
                 <div class="card-header bg-success">Quiz</div>

@@ -8,6 +8,7 @@
 
 <div class="container">
     <h1>Welcome to StudyTime!</h1>
+    <div class="alert alert-success my-3" role="alert" th:if="${loggedOut}">You successfully logged out.</div>
 
     <form method="post" name="f" th:action="@{/login}" style="max-width:600px;">
         <fieldset class="form-group">

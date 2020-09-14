@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().formLogin().loginPage("/login")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/perform-logout"))
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/login?loggedOut=true")
                 .invalidateHttpSession(true)        // set invalidation state when logout
                 .deleteCookies("JSESSIONID");
     }

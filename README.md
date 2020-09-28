@@ -4,28 +4,6 @@ An app that enables studying through flash cards and quizzes. It was built prima
 Spring Security for user login and Spring Data JPA to connect to a MySQL database. Uses Thymeleaf for views, and  
 Bootstrap for style and responsiveness. Shared under the MIT licese.
 
-MIT License
-
-Copyright (c) 2020 Mary Armstrong
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
 ## Table of Contents
 - [StudyTime](#studytime)
   * [Table of Contents](#table-of-contents)
@@ -107,34 +85,39 @@ navigate through them.
 These features are in the order that they will be completed. As they are completed they will be removed and added to the
  completed list.
 
-* Categories and ability to view flash card decks and quizzes together by category.
 
-* Ability to remove dummy data automatically.
+* Spring Security authentication.
 
-* Search and sort quizzes and flash cards on index screens alphabetically or by category.
+* User profile pages.
 
-* Spring Security including:
-    * Authentication
-    * User roles
+* Spring Security user roles.
+    
+* Goals for users to achieve on scores or flash card use. Quizzes and flash card decks can be assigned by admin 
+to classes or individual users.
 
-* User profile pages. User stats for quiz completion and grades and flash card use. 
+* User stats for quiz completion and grades and flash card use.
+
+* Notifications to user and admin about goal completions.
 
 * Optional grouping of users into classes by admin. 
 
-* Goals for users to achieve on scores or flash card use. Quizzes and flash card decks can be assigned by admin 
-to classes or individual users.
+* Ability to remove dummy data automatically.
 
 
 ### Completed Features
 
 * Bootstrap carousel with custom flipping flash cards. _completed 7/21/2020_
 
-* Server side validation. _completed 7/22/2020_
+* Server side validation of all user forms. _completed 7/22/2020_
 
 * Ability for user to add quizzes and flash card decks with dynamic forms. _completed 7/22/2020_
 
 * Ability for user to delete quizzes and flash card decks. _completed 7/22/2020_
 
-* Ability to add dummy data. _completed 7/27/2020_
+* Ability to automatically add dummy data. _completed 7/27/2020_
 
 * Home page with randomly displayed flash card decks and quizzes. _completed 7/30/2020_
+
+* Categories and ability to view flash card decks and quizzes together by category. _completed 8/17/2020_
+
+* Search page for seeing quizzes, flash cards, and categories containing user-specified text. _completed 8/22/2020_

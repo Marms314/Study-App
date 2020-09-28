@@ -43,8 +43,6 @@ if (document.querySelector(".answersDiv")) {
         if (random % 2 === 0) {
             let firstAnswer = answers[i].querySelector(".answer");
             answers[i].appendChild(firstAnswer);
-            console.log("was even");
-            console.log(firstAnswer);
         }
     }
 }

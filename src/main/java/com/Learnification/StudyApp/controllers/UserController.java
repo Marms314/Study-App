@@ -1,5 +1,6 @@
 package com.Learnification.StudyApp.controllers;
 
+import com.Learnification.StudyApp.dtos.UserDto;
 import com.Learnification.StudyApp.models.User;
 import com.Learnification.StudyApp.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.Optional;
 
@@ -40,6 +42,13 @@ public class UserController {
         } else {
             return "redirect:";
         }
+    }
+
+    @GetMapping("registration")
+    public String showRegistrationForm(WebRequest request, Model model) {
+        UserDto userDto = new UserDto();
+        model.addAttribute("user", userDto);
+        return "registration";
     }
 
 

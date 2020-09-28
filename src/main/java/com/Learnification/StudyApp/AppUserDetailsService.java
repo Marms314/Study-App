@@ -1,6 +1,5 @@
 package com.Learnification.StudyApp;
 
-import com.Learnification.StudyApp.models.AppUserDetails;
 import com.Learnification.StudyApp.models.User;
 import com.Learnification.StudyApp.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

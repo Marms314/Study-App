@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 
@@ -22,8 +23,17 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @GetMapping("list-all")
+    public String renderManageCardDeckForm(Model model) {
+
+        model.addAttribute("title", "All Users");
+        model.addAttribute("users", userRepository.findAll());
+
+        return "user/list";
+    }
+
     @GetMapping("profile/me")
-    public String renderUser(Model model) {
+    public String renderCurrentUser(Model model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
 
@@ -40,7 +50,21 @@ public class UserController {
             model.addAttribute("name", currentUser.get().getName());
             return "user/profile";
         } else {
-            return "redirect:";
+            return "redirect:/user/list-all";
+        }
+    }
+
+    @GetMapping("profile/{userId}")
+    public String renderUser(Model model, @PathVariable int userId) {
+
+        Optional<User> user = userRepository.findById(userId);
+
+        if (user.isPresent()) {
+            model.addAttribute("userName", user.get().getUserName());
+            model.addAttribute("name", user.get().getName());
+            return "user/profile";
+        } else {
+            return "redirect:/user/list-all";
         }
     }
 
@@ -48,7 +72,7 @@ public class UserController {
     public String showRegistrationForm(WebRequest request, Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
-        return "registration";
+        return "user/registration";
     }
 
 

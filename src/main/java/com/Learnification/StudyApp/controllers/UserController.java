@@ -47,7 +47,7 @@ public class UserController {
 
         if (currentUser.isPresent()) {
             model.addAttribute("userName", currentUser.get().getUserName());
-            model.addAttribute("name", currentUser.get().getName());
+            model.addAttribute("name", currentUser.get().getDisplayName());
             return "user/profile";
         } else {
             return "redirect:/user/list-all";
@@ -61,7 +61,7 @@ public class UserController {
 
         if (user.isPresent()) {
             model.addAttribute("userName", user.get().getUserName());
-            model.addAttribute("name", user.get().getName());
+            model.addAttribute("name", user.get().getDisplayName());
             return "user/profile";
         } else {
             return "redirect:/user/list-all";

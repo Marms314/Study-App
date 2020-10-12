@@ -12,31 +12,36 @@
 
     <h2 class="text-dark my-3">Create User</h2>
     <form method="post" enctype="utf8">
-        <div>
-            <label>Username</label>
-            <input th:field="${user.userName}"/>
+        <div class="form-group">
+            <label for="userName">Username</label>
+            <input id="userName" class="form-control" th:field="${user.userName}" placeholder="Choose a Username" />
             <span th:errors="${user.userName}" class="text-danger"></span>
         </div>
-        <div>
-            <label>Display Name</label>
-            <input th:field="${user.displayName}"/>
+
+        <div class="form-group">
+            <label for="displayName">Display Name</label>
+            <input id="displayName" class="form-control" th:field="${user.displayName}" placeholder="Choose a Display Name" />
             <span th:errors="${user.displayName}" class="text-danger"></span>
         </div>
-        <div>
-            <label>Email</label>
-            <input type="email" th:field="${user.email}"/>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" class="form-control" th:field="${user.email}" placeholder="Enter your Email" />
             <span th:errors="${user.email}" class="text-danger"></span>
         </div>
-        <div>
-            <label>Password</label>
-            <input type="password" th:field="${user.password}"/>
+
+        <div class="form-group">
+            <label for="password" >Password</label>
+            <input id="password" type="password" class="form-control" th:field="${user.password}" placeholder="Choose a Password" />
             <span th:errors="${user.password}" class="text-danger"></span>
         </div>
-        <div>
-            <label>Confirm Password</label>
-            <input type="password" th:field="${user.matchingPassword}"/>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" type="password" class="form-control" th:field="${user.matchingPassword}" placeholder="Confirm your Password"/>
             <span th:errors="${user.matchingPassword}" class="text-danger"></span>
         </div>
+
         <button type="submit" class="btn btn-dark mb-4" >Submit</button>
     </form>
 </body>

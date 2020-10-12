@@ -26,7 +26,7 @@
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" type="email" class="form-control" th:field="${user.email}" placeholder="Enter your Email" />
+            <input id="email" type="email" class="form-control" th:field="${user.email}" placeholder="Enter Your Email" />
             <span th:errors="${user.email}" class="text-danger"></span>
         </div>
 
@@ -38,7 +38,7 @@
 
         <div class="form-group">
             <label for="confirmPassword">Confirm Password</label>
-            <input id="confirmPassword" type="password" class="form-control" th:field="${user.matchingPassword}" placeholder="Confirm your Password"/>
+            <input id="confirmPassword" type="password" class="form-control" th:field="${user.matchingPassword}" placeholder="Confirm Your Password"/>
             <span th:errors="${user.matchingPassword}" class="text-danger"></span>
         </div>
 

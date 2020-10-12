@@ -11,7 +11,7 @@ public class User {
     @GeneratedValue
     private int id;
     private String userName;
-    private String name;
+    private String displayName;
     private String password;
     private String email;
     private boolean active;
@@ -29,12 +29,12 @@ public class User {
         this.userName = userName;
     }
 
-    public String getName() {
-        return name;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public String getPassword() {

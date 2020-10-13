@@ -8,11 +8,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 
@@ -47,7 +47,7 @@ public class UserController {
 
         if (currentUser.isPresent()) {
             model.addAttribute("userName", currentUser.get().getUserName());
-            model.addAttribute("name", currentUser.get().getDisplayName());
+            model.addAttribute("name", currentUser.get().getRealName());
             return "user/profile";
         } else {
             return "redirect:/user/list-all";
@@ -61,7 +61,7 @@ public class UserController {
 
         if (user.isPresent()) {
             model.addAttribute("userName", user.get().getUserName());
-            model.addAttribute("name", user.get().getDisplayName());
+            model.addAttribute("name", user.get().getRealName());
             return "user/profile";
         } else {
             return "redirect:/user/list-all";
@@ -73,6 +73,18 @@ public class UserController {
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
         return "user/registration";
+    }
+
+    @PostMapping("registration")
+    public String processRegistrationForm(@ModelAttribute @Valid UserDto userDto, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            UserDto newUserDto = new UserDto();
+            model.addAttribute("user", newUserDto);
+            return "user/registration";
+        }
+
+        return "redirect:/user/list-all";
     }
 
 

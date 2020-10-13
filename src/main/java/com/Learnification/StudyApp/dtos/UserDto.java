@@ -11,7 +11,7 @@ public class UserDto {
 
     @NotNull
     @NotEmpty
-    private String displayName;
+    private String realName;
 
     @NotNull
     @NotEmpty
@@ -30,12 +30,12 @@ public class UserDto {
         this.userName = userName;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getRealNameName() {
+        return realName;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public void setRealNameName(String realName) {
+        this.realName = realName;
     }
 
     public String getPassword() {

@@ -88,7 +88,7 @@ public class QuizController {
 
         model.addAttribute("scoreText", scoreText);
         model.addAttribute("isGoodScore", isGoodScore);
-        model.addAttribute("title", quiz.getName() + "Results");
+        model.addAttribute("title", quiz.getName() + " Results");
         return "quiz/viewResults";
     }
 

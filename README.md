@@ -1,19 +1,14 @@
 # StudyTime
 
-An app that enables studying through flash cards and quizzes. It was built primarily with Java using Spring. It includes 
-Spring Security for user login and Spring Data JPA to connect to a MySQL database. Uses Thymeleaf for views, and  
-Bootstrap for style and responsiveness. Shared under the MIT licese.
+An app that enables studying through flash cards and quizzes. It was built primarily with Java using Spring. It uses: Spring Data JPA to connect to a MySQL database, Thymeleaf for views, and Bootstrap for style and responsiveness. Shared under the MIT licese.
 
 ## Table of Contents
-- [StudyTime](#studytime)
-  * [Table of Contents](#table-of-contents)
   * [How to Run This Repo](#how-to-run-this-repo)
     + [Requirements](#requirements)
     + [Instructions](#instructions)
   * [Overview of the App](#overview-of-the-app)
   * [Features](#features)
-    + [Future Features](#future-features)
-    + [Completed Features](#completed-features)
+
 
 ## How to Run This Repo
 ### Requirements

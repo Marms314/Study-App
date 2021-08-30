@@ -80,44 +80,19 @@ navigate through them.
 
 
 ## Features
-### Future Features
 
-These features are in the order that they will be completed. As they are completed they will be removed and added to the
- completed list.
+* Bootstrap carousel with custom flipping flash cards.
 
+* Server side validation of all user forms.
 
-* Spring Security authentication.
+* Ability for user to add quizzes and flash card decks with dynamic forms.
 
-* User profile pages.
+* Ability for user to delete quizzes and flash card decks.
 
-* Spring Security user roles.
-    
-* Goals for users to achieve on scores or flash card use. Quizzes and flash card decks can be assigned by admin 
-to classes or individual users.
+* Ability to automatically add dummy data for testing/demo.
 
-* User stats for quiz completion and grades and flash card use.
+* Home page with randomly displayed flash card decks and quizzes.
 
-* Notifications to user and admin about goal completions.
+* Categories and ability to view flash card decks and quizzes together by category.
 
-* Optional grouping of users into classes by admin. 
-
-* Ability to remove dummy data automatically.
-
-
-### Completed Features
-
-* Bootstrap carousel with custom flipping flash cards. _completed 7/21/2020_
-
-* Server side validation of all user forms. _completed 7/22/2020_
-
-* Ability for user to add quizzes and flash card decks with dynamic forms. _completed 7/22/2020_
-
-* Ability for user to delete quizzes and flash card decks. _completed 7/22/2020_
-
-* Ability to automatically add dummy data. _completed 7/27/2020_
-
-* Home page with randomly displayed flash card decks and quizzes. _completed 7/30/2020_
-
-* Categories and ability to view flash card decks and quizzes together by category. _completed 8/17/2020_
-
-* Search page for seeing quizzes, flash cards, and categories containing user-specified text. _completed 8/22/2020_
+* Search page for seeing quizzes, flash cards, and categories containing user-specified text.
